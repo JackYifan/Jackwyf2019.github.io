@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>面向对象程序设计 // Blog</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.83.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Yifan Wu" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://Jackwyf2019.github.io/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="面向对象程序设计"/>
+<meta name="twitter:description" content="字符串 public void test2(){ //array是一个引用 5行是5个指向数组的引用 类似于C语言中的int ** (也有一些区别)  //所以5行的排列顺序不一定是连续的 也可以不一样长  int[][]array=new int[5][]; array[0]=new int[3]; array[1]=new int[4]; } scanf(&#34;%d%d&#34;,&amp;m,&amp;N); input:5 6 //scanf是从缓冲区中读取数据的，所以此时缓冲区中还剩下\n没有被scanf读走需要 getchar() char*str=&#34;hello world &#34;; printf(&#34;%s&#34;,str); printf(&#34;%p &#34;,str); //字符串在常量池中，用指针指向 char*str2=&#34;hello world &#34;; printf(&#34;%p &#34;,str2); //在堆中，初始化 char s3[]=&#34;hello world&#34;; printf(&#34;%p&#34;,s3); return 0; output:hello world 00405044 00405044 0061FF0C
+char*p=strstr(&#34;hello world&#34;,&#34;world&#34;); printf(&#34;%s&#34;,p); output: world int array[5]{1,2,3,4,5}; //容器内数字没有改变 for(int x:array){ x&#43;=100; cout&lt;&lt;x&lt;&lt;&#34; &#34;; } //容器改变 for(int &amp;x:array){ x&#43;=100; cout&lt;&lt;x&lt;&lt;&#34; &#34;; } 对象的构造专题 #include&lt;iostream&gt;using namespace std; class Student{ private: int sid ; string name ; public: Student(){ cout&lt;&lt;&#34;Student()&#34;&lt;&lt;endl; } Student(int sid , string name){ this-&gt;sid=sid;//等号为赋值，不是初始化  this-&gt;name=name ; cout&lt;&lt;&#34;student(int,string)&#34;&lt;&lt;endl; } }; int main(){ int num(122); cout&lt;&lt;num&lt;&lt;endl; int array[]={1,2,3,4,5}; int array2[]{1,2,3,4,5}; Student stu;//用默认构造函数Student()创建对象  Student zs(1001,&#34;shangsan&#34;);//用构造函数创建对象  Student ls{1002,&#34;lisi&#34;}; Student ww={1003,&#34;wangwu&#34;};//初始化 } 多态 #include&lt;iostream&gt;using namespace std; class People{ public: virtual void say(){cout&lt;&lt;&#34;I&#39;m a person&#34;&lt;&lt;endl;} }; class Student : public People{ void say(){cout&lt;&lt;&#34;I&#39;m a student&#34;&lt;&lt;endl;} }; class Teacher:public People{ public: void say(){cout&lt;&lt;&#34;I&#39;m a teacher&#34;&lt;&lt;endl;} }; void func(People* people){ people-&gt;say(); } int main(){ Student stu; Teacher tea ; //如果不是虚函数，C&#43;&#43;为追求效率会选择静态链编，直接在编译时期就绑定People::say()的地址  //改为虚函数后，可以采用动态链接的方式，才有多态的效果，编译时不确定函数的入口地址，在运行时才确定  func(&amp;stu); func(&amp;tea); People &amp;r=stu;//引用也有多态  r."/>
+
+    <meta property="og:title" content="面向对象程序设计" />
+<meta property="og:description" content="字符串 public void test2(){ //array是一个引用 5行是5个指向数组的引用 类似于C语言中的int ** (也有一些区别)  //所以5行的排列顺序不一定是连续的 也可以不一样长  int[][]array=new int[5][]; array[0]=new int[3]; array[1]=new int[4]; } scanf(&#34;%d%d&#34;,&amp;m,&amp;N); input:5 6 //scanf是从缓冲区中读取数据的，所以此时缓冲区中还剩下\n没有被scanf读走需要 getchar() char*str=&#34;hello world &#34;; printf(&#34;%s&#34;,str); printf(&#34;%p &#34;,str); //字符串在常量池中，用指针指向 char*str2=&#34;hello world &#34;; printf(&#34;%p &#34;,str2); //在堆中，初始化 char s3[]=&#34;hello world&#34;; printf(&#34;%p&#34;,s3); return 0; output:hello world 00405044 00405044 0061FF0C
+char*p=strstr(&#34;hello world&#34;,&#34;world&#34;); printf(&#34;%s&#34;,p); output: world int array[5]{1,2,3,4,5}; //容器内数字没有改变 for(int x:array){ x&#43;=100; cout&lt;&lt;x&lt;&lt;&#34; &#34;; } //容器改变 for(int &amp;x:array){ x&#43;=100; cout&lt;&lt;x&lt;&lt;&#34; &#34;; } 对象的构造专题 #include&lt;iostream&gt;using namespace std; class Student{ private: int sid ; string name ; public: Student(){ cout&lt;&lt;&#34;Student()&#34;&lt;&lt;endl; } Student(int sid , string name){ this-&gt;sid=sid;//等号为赋值，不是初始化  this-&gt;name=name ; cout&lt;&lt;&#34;student(int,string)&#34;&lt;&lt;endl; } }; int main(){ int num(122); cout&lt;&lt;num&lt;&lt;endl; int array[]={1,2,3,4,5}; int array2[]{1,2,3,4,5}; Student stu;//用默认构造函数Student()创建对象  Student zs(1001,&#34;shangsan&#34;);//用构造函数创建对象  Student ls{1002,&#34;lisi&#34;}; Student ww={1003,&#34;wangwu&#34;};//初始化 } 多态 #include&lt;iostream&gt;using namespace std; class People{ public: virtual void say(){cout&lt;&lt;&#34;I&#39;m a person&#34;&lt;&lt;endl;} }; class Student : public People{ void say(){cout&lt;&lt;&#34;I&#39;m a student&#34;&lt;&lt;endl;} }; class Teacher:public People{ public: void say(){cout&lt;&lt;&#34;I&#39;m a teacher&#34;&lt;&lt;endl;} }; void func(People* people){ people-&gt;say(); } int main(){ Student stu; Teacher tea ; //如果不是虚函数，C&#43;&#43;为追求效率会选择静态链编，直接在编译时期就绑定People::say()的地址  //改为虚函数后，可以采用动态链接的方式，才有多态的效果，编译时不确定函数的入口地址，在运行时才确定  func(&amp;stu); func(&amp;tea); People &amp;r=stu;//引用也有多态  r." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Jackwyf2019.github.io/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-08T19:40:20&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-08T19:40:20&#43;08:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://Jackwyf2019.github.io/"><img class="app-header-avatar" src="https://avatars.githubusercontent.com/u/57058925?v=4" alt="Yifan Wu" /></a>
+      <h1>Blog</h1>
+      <p>Welcome to my blog.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">面向对象程序设计</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 8, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="字符串">字符串</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">(){</span>
+    <span style="color:#75715e">//array是一个引用 5行是5个指向数组的引用 类似于C语言中的int **  (也有一些区别)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//所以5行的排列顺序不一定是连续的 也可以不一样长
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span>array<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>5<span style="color:#f92672">][];</span>
+    array<span style="color:#f92672">[</span>0<span style="color:#f92672">]=</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>3<span style="color:#f92672">];</span>
+    array<span style="color:#f92672">[</span>1<span style="color:#f92672">]=</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>4<span style="color:#f92672">];</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">scanf(<span style="color:#e6db74">&#34;%d%d&#34;</span>,<span style="color:#f92672">&amp;</span>m,<span style="color:#f92672">&amp;</span>N);
+input:<span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>
+    
+<span style="color:#75715e">//scanf是从缓冲区中读取数据的，所以此时缓冲区中还剩下\n没有被scanf读走需要 getchar()
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>str<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello world &#34;</span>;
+printf(<span style="color:#e6db74">&#34;%s&#34;</span>,str);
+printf(<span style="color:#e6db74">&#34;%p &#34;</span>,str);
+<span style="color:#75715e">//字符串在常量池中，用指针指向
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>str2<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello world &#34;</span>;
+printf(<span style="color:#e6db74">&#34;%p &#34;</span>,str2);
+<span style="color:#75715e">//在堆中，初始化
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> s3[]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello world&#34;</span>;
+printf(<span style="color:#e6db74">&#34;%p&#34;</span>,s3);
+<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</code></pre></div><p><code>output:hello world 00405044 00405044 0061FF0C</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>p<span style="color:#f92672">=</span>strstr(<span style="color:#e6db74">&#34;hello world&#34;</span>,<span style="color:#e6db74">&#34;world&#34;</span>);
+printf(<span style="color:#e6db74">&#34;%s&#34;</span>,p);
+output: world
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> array[<span style="color:#ae81ff">5</span>]{<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>};
+<span style="color:#75715e">//容器内数字没有改变
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x:array){
+    x<span style="color:#f92672">+=</span><span style="color:#ae81ff">100</span>;
+    cout<span style="color:#f92672">&lt;&lt;</span>x<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34; &#34;</span>;
+}
+<span style="color:#75715e">//容器改变
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>x:array){
+    x<span style="color:#f92672">+=</span><span style="color:#ae81ff">100</span>;
+    cout<span style="color:#f92672">&lt;&lt;</span>x<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34; &#34;</span>;
+}
+</code></pre></div><h2 id="对象的构造专题">对象的构造专题</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>{
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> sid ;
+    string name ;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Student(){
+        cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;Student()&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+    }
+    Student(<span style="color:#66d9ef">int</span> sid , string name){
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>sid<span style="color:#f92672">=</span>sid;<span style="color:#75715e">//等号为赋值，不是初始化
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>name<span style="color:#f92672">=</span>name ;
+        cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;student(int,string)&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+    }
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+    <span style="color:#66d9ef">int</span> num(<span style="color:#ae81ff">122</span>);
+    cout<span style="color:#f92672">&lt;&lt;</span>num<span style="color:#f92672">&lt;&lt;</span>endl;
+    <span style="color:#66d9ef">int</span> array[]<span style="color:#f92672">=</span>{<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>};
+    <span style="color:#66d9ef">int</span> array2[]{<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>};
+    Student stu;<span style="color:#75715e">//用默认构造函数Student()创建对象
+</span><span style="color:#75715e"></span>    Student zs(<span style="color:#ae81ff">1001</span>,<span style="color:#e6db74">&#34;shangsan&#34;</span>);<span style="color:#75715e">//用构造函数创建对象
+</span><span style="color:#75715e"></span>    Student ls{<span style="color:#ae81ff">1002</span>,<span style="color:#e6db74">&#34;lisi&#34;</span>};
+    Student ww<span style="color:#f92672">=</span>{<span style="color:#ae81ff">1003</span>,<span style="color:#e6db74">&#34;wangwu&#34;</span>};<span style="color:#75715e">//初始化
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h2 id="多态">多态</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">People</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> say(){cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;I&#39;m a person&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;}
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> People{
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">say</span>(){cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;I&#39;m a student&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;}
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Teacher</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> People{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> say(){cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;I&#39;m a teacher&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;}
+};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(People<span style="color:#f92672">*</span> people){
+    people<span style="color:#f92672">-&gt;</span>say();
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+    Student stu;
+    Teacher tea ; 
+    <span style="color:#75715e">//如果不是虚函数，C++为追求效率会选择静态链编，直接在编译时期就绑定People::say()的地址
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//改为虚函数后，可以采用动态链接的方式，才有多态的效果，编译时不确定函数的入口地址，在运行时才确定
+</span><span style="color:#75715e"></span>    func(<span style="color:#f92672">&amp;</span>stu);
+    func(<span style="color:#f92672">&amp;</span>tea);
+    People <span style="color:#f92672">&amp;</span>r<span style="color:#f92672">=</span>stu;<span style="color:#75715e">//引用也有多态
+</span><span style="color:#75715e"></span>    r.say();
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    
+}
+</code></pre></div><ul>
+<li><strong>只要基类的方法是virtual,其所有子类的同名方法全部是虚方法</strong></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">People</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">say</span><span style="color:#f92672">(){</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;I&#39;m a person&#34;</span><span style="color:#f92672">);</span><span style="color:#75715e">//没有多态性质，静态链接
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li><strong>静态方法和对象没有关系了，只和类有关，不访问非静态的属性。静态函数静态链编。</strong></li>
+</ul>
+<h2 id="抽象类">抽象类</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">double</span> area()<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> Shape{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">double</span> r;
+    Circle(<span style="color:#66d9ef">int</span> r<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">:</span>r(r){}
+    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">area</span>(){<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">3.14</span><span style="color:#f92672">*</span>r<span style="color:#f92672">*</span>r;}
+
+};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(Shape <span style="color:#f92672">&amp;</span>s){
+    cout<span style="color:#f92672">&lt;&lt;</span>s.area()<span style="color:#f92672">&lt;&lt;</span>endl;
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+    Circle c(<span style="color:#ae81ff">2</span>);
+    func(c);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
