@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>gulimall笔记 // My New Hugo Site</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.83.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://Jackwyf2019.github.io/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="gulimall笔记"/>
+<meta name="twitter:description" content="CORS 跨域：协议，域名，端口任意一个不同都会导致跨域
+Request Method:OPTIONS 预检请求 nginx部署为同一个域 响应头允许跨域 使用Springboot提供的filter
+@Bean public CorsWebFilter corsWebFilter(){ UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); CorsConfiguration corsConfiguration = new CorsConfiguration(); //1、配置跨域  corsConfiguration.addAllowedHeader(&#34;*&#34;); corsConfiguration.addAllowedMethod(&#34;*&#34;); corsConfiguration.addAllowedOrigin(&#34;*&#34;); corsConfiguration.setAllowCredentials(true); //注册配置  source.registerCorsConfiguration(&#34;/**&#34;,corsConfiguration); return new CorsWebFilter(source); } Stream @Override public List&lt;CategoryEntity&gt; listTree() { //查询出所有项  List&lt;CategoryEntity&gt; entities = baseMapper.selectList(null); //查出所有项的根结点  List&lt;CategoryEntity&gt; roots = entities.stream().filter((entity) -&gt; { return entity.getParentCid() == 0; }).map((root) -&gt; { root.setChildren(getChildren(root, entities)); return root; }).sorted((e1, e2) -&gt; { return (e1."/>
+
+    <meta property="og:title" content="gulimall笔记" />
+<meta property="og:description" content="CORS 跨域：协议，域名，端口任意一个不同都会导致跨域
+Request Method:OPTIONS 预检请求 nginx部署为同一个域 响应头允许跨域 使用Springboot提供的filter
+@Bean public CorsWebFilter corsWebFilter(){ UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); CorsConfiguration corsConfiguration = new CorsConfiguration(); //1、配置跨域  corsConfiguration.addAllowedHeader(&#34;*&#34;); corsConfiguration.addAllowedMethod(&#34;*&#34;); corsConfiguration.addAllowedOrigin(&#34;*&#34;); corsConfiguration.setAllowCredentials(true); //注册配置  source.registerCorsConfiguration(&#34;/**&#34;,corsConfiguration); return new CorsWebFilter(source); } Stream @Override public List&lt;CategoryEntity&gt; listTree() { //查询出所有项  List&lt;CategoryEntity&gt; entities = baseMapper.selectList(null); //查出所有项的根结点  List&lt;CategoryEntity&gt; roots = entities.stream().filter((entity) -&gt; { return entity.getParentCid() == 0; }).map((root) -&gt; { root.setChildren(getChildren(root, entities)); return root; }).sorted((e1, e2) -&gt; { return (e1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Jackwyf2019.github.io/post/blog/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-08T19:40:20&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-08T19:40:20&#43;08:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://Jackwyf2019.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>My New Hugo Site</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">gulimall笔记</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 8, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          10 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="heading"></h1>
+<h2 id="cors">CORS</h2>
+<p>跨域：协议，域名，端口任意一个不同都会导致跨域</p>
+<pre><code>Request Method:OPTIONS
+预检请求
+nginx部署为同一个域
+响应头允许跨域
+</code></pre><p>使用Springboot提供的filter</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> CorsWebFilter <span style="color:#a6e22e">corsWebFilter</span><span style="color:#f92672">(){</span>
+        UrlBasedCorsConfigurationSource source <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UrlBasedCorsConfigurationSource<span style="color:#f92672">();</span>
+
+        CorsConfiguration corsConfiguration <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CorsConfiguration<span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">//1、配置跨域
+</span><span style="color:#75715e"></span>        corsConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">addAllowedHeader</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">);</span>
+        corsConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">addAllowedMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">);</span>
+        corsConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">addAllowedOrigin</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">);</span>
+        corsConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">setAllowCredentials</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+		<span style="color:#75715e">//注册配置
+</span><span style="color:#75715e"></span>        source<span style="color:#f92672">.</span><span style="color:#a6e22e">registerCorsConfiguration</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/**&#34;</span><span style="color:#f92672">,</span>corsConfiguration<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> CorsWebFilter<span style="color:#f92672">(</span>source<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h2 id="stream">Stream</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">listTree</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//查询出所有项
+</span><span style="color:#75715e"></span>        List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> entities <span style="color:#f92672">=</span> baseMapper<span style="color:#f92672">.</span><span style="color:#a6e22e">selectList</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+
+        <span style="color:#75715e">//查出所有项的根结点
+</span><span style="color:#75715e"></span>        List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> roots <span style="color:#f92672">=</span> entities<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">filter</span><span style="color:#f92672">((</span>entity<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+                    <span style="color:#66d9ef">return</span> entity<span style="color:#f92672">.</span><span style="color:#a6e22e">getParentCid</span><span style="color:#f92672">()</span> <span style="color:#f92672">==</span> 0<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}).</span><span style="color:#a6e22e">map</span><span style="color:#f92672">((</span>root<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+                    root<span style="color:#f92672">.</span><span style="color:#a6e22e">setChildren</span><span style="color:#f92672">(</span>getChildren<span style="color:#f92672">(</span>root<span style="color:#f92672">,</span> entities<span style="color:#f92672">));</span>
+                    <span style="color:#66d9ef">return</span> root<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}).</span><span style="color:#a6e22e">sorted</span><span style="color:#f92672">((</span>e1<span style="color:#f92672">,</span> e2<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+                    <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>e1<span style="color:#f92672">.</span><span style="color:#a6e22e">getSort</span><span style="color:#f92672">()==</span><span style="color:#66d9ef">null</span><span style="color:#f92672">?</span>0<span style="color:#f92672">:</span>e1<span style="color:#f92672">.</span><span style="color:#a6e22e">getSort</span><span style="color:#f92672">())-(</span>e2<span style="color:#f92672">.</span><span style="color:#a6e22e">getSort</span><span style="color:#f92672">()==</span><span style="color:#66d9ef">null</span><span style="color:#f92672">?</span>0<span style="color:#f92672">:</span>e2<span style="color:#f92672">.</span><span style="color:#a6e22e">getSort</span><span style="color:#f92672">());</span>
+                <span style="color:#f92672">}).</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toList</span><span style="color:#f92672">());</span>
+        <span style="color:#66d9ef">return</span> roots<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p><code>.sorted</code>需要判空，因为可能list中没有数据或者只有一个数据</p>
+<p><code>.map</code>如果流总没有数据则不执行所以最优collect的list是<code>[]</code></p>
+<h2 id="gateway">gateway</h2>
+<p>路径重写</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">        - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">product_route</span>
+          <span style="color:#f92672">uri</span>: <span style="color:#ae81ff">lb://gulimall-product</span>
+          <span style="color:#f92672">predicates</span>:
+            - <span style="color:#ae81ff">Path=/api/product/**</span>
+          <span style="color:#f92672">filters</span>:
+            - <span style="color:#ae81ff">RewritePath=/api/(?&lt;segment&gt;.*),/$\{segment}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@EnableDiscoveryClient</span> 开启注册发现功能
+</code></pre></div><p>精确的路由需要放在高优先级</p>
+<h2 id="springboot">Springboot</h2>
+<p><code>@RequestBody</code> 获取请求体，必须发送POST请求</p>
+<p>将请求体中的数据（JSON）转换为相应的对象</p>
+<blockquote>
+<p>两个等价的注解</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@RequestMapping</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/catelog/list&#34;</span><span style="color:#f92672">,</span>method <span style="color:#f92672">=</span> RequestMethod<span style="color:#f92672">.</span><span style="color:#a6e22e">GET</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/catelog/list&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><h2 id="校验">校验</h2>
+<p>JSR303 javax.</p>
+<p>@NotBlank @Valid</p>
+<p><code>@NotBlank(message = &quot;品牌名必须提交&quot;)</code></p>
+<p>错误信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2021-02-09 09:10:14&#34;</span>,
+    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#ae81ff">400</span>,
+    <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Bad Request&#34;</span>,
+    <span style="color:#f92672">&#34;errors&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;codes&#34;</span>: [
+                <span style="color:#e6db74">&#34;NotBlank.brandEntity.name&#34;</span>,
+                <span style="color:#e6db74">&#34;NotBlank.name&#34;</span>,
+                <span style="color:#e6db74">&#34;NotBlank.java.lang.String&#34;</span>,
+                <span style="color:#e6db74">&#34;NotBlank&#34;</span>
+            ],
+            <span style="color:#f92672">&#34;arguments&#34;</span>: [
+                {
+                    <span style="color:#f92672">&#34;codes&#34;</span>: [
+                        <span style="color:#e6db74">&#34;brandEntity.name&#34;</span>,
+                        <span style="color:#e6db74">&#34;name&#34;</span>
+                    ],
+                    <span style="color:#f92672">&#34;arguments&#34;</span>: <span style="color:#66d9ef">null</span>,
+                    <span style="color:#f92672">&#34;defaultMessage&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>,
+                    <span style="color:#f92672">&#34;code&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>
+                }
+            ],
+            <span style="color:#f92672">&#34;defaultMessage&#34;</span>: <span style="color:#e6db74">&#34;不能为空&#34;</span>,
+            <span style="color:#f92672">&#34;objectName&#34;</span>: <span style="color:#e6db74">&#34;brandEntity&#34;</span>,
+            <span style="color:#f92672">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>,
+            <span style="color:#f92672">&#34;rejectedValue&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+            <span style="color:#f92672">&#34;bindingFailure&#34;</span>: <span style="color:#66d9ef">false</span>,
+            <span style="color:#f92672">&#34;code&#34;</span>: <span style="color:#e6db74">&#34;NotBlank&#34;</span>
+        }
+    ],
+    <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Validation failed for object=&#39;brandEntity&#39;. Error count: 1&#34;</span>,
+    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/product/brand/save&#34;</span>
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@RequestMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/save&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#75715e">//@RequiresPermissions(&#34;product:brand:save&#34;)
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> R <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@Valid</span> <span style="color:#a6e22e">@RequestBody</span> BrandEntity brand<span style="color:#f92672">,</span> BindingResult result<span style="color:#f92672">){</span>
+		brandService<span style="color:#f92672">.</span><span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>brand<span style="color:#f92672">);</span>
+
+        <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><blockquote>
+<p>BindingResult 存校验结果</p>
+</blockquote>
+<h3 id="示例">示例</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Data</span>
+<span style="color:#a6e22e">@TableName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pms_brand&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BrandEntity</span> <span style="color:#66d9ef">implements</span> Serializable <span style="color:#f92672">{</span>
+	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> 1L<span style="color:#f92672">;</span>
+
+	<span style="color:#75715e">/**
+</span><span style="color:#75715e">	 * 品牌id
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#a6e22e">@TableId</span>
+	<span style="color:#66d9ef">private</span> Long brandId<span style="color:#f92672">;</span>
+	<span style="color:#75715e">/**
+</span><span style="color:#75715e">	 * 品牌名
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#a6e22e">@NotBlank</span><span style="color:#f92672">(</span>message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;品牌名必须提交&#34;</span><span style="color:#f92672">)</span>
+	<span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+	<span style="color:#75715e">/**
+</span><span style="color:#75715e">	 * 品牌logo地址
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#a6e22e">@NotEmpty</span>
+	<span style="color:#a6e22e">@URL</span><span style="color:#f92672">(</span>message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;logo必须是一个合法的url地址&#34;</span><span style="color:#f92672">)</span>
+	<span style="color:#66d9ef">private</span> String logo<span style="color:#f92672">;</span>
+	<span style="color:#75715e">/**
+</span><span style="color:#75715e">	 * 介绍
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#66d9ef">private</span> String descript<span style="color:#f92672">;</span>
+	<span style="color:#75715e">/**
+</span><span style="color:#75715e">	 * 显示状态[0-不显示；1-显示]
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#66d9ef">private</span> Integer showStatus<span style="color:#f92672">;</span>
+	<span style="color:#75715e">/**
+</span><span style="color:#75715e">	 * 检索首字母
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#a6e22e">@NotEmpty</span>
+	<span style="color:#a6e22e">@Pattern</span><span style="color:#f92672">(</span>regexp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/^[a-zA-Z]$/&#34;</span><span style="color:#f92672">,</span>message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;检索首字母必须是一个字母&#34;</span><span style="color:#f92672">)</span>
+	<span style="color:#66d9ef">private</span> String firstLetter<span style="color:#f92672">;</span>
+	<span style="color:#75715e">/**
+</span><span style="color:#75715e">	 * 排序
+</span><span style="color:#75715e">	 */</span>
+	<span style="color:#a6e22e">@NotNull</span>
+	<span style="color:#a6e22e">@Min</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> 0<span style="color:#f92672">,</span>message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;排序必须大于0&#34;</span><span style="color:#f92672">)</span>
+	<span style="color:#66d9ef">private</span> Integer sort<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">}</span>
+
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 保存
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@RequestMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/save&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#75715e">//@RequiresPermissions(&#34;product:brand:save&#34;)
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> R <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@Valid</span> <span style="color:#a6e22e">@RequestBody</span> BrandEntity brand<span style="color:#f92672">,</span> BindingResult result<span style="color:#f92672">){</span>
+        <span style="color:#75715e">//校验
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>result<span style="color:#f92672">.</span><span style="color:#a6e22e">hasErrors</span><span style="color:#f92672">()){</span>
+            Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span>String<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;();</span>
+            <span style="color:#75715e">//遍历所有属性错误
+</span><span style="color:#75715e"></span>            result<span style="color:#f92672">.</span><span style="color:#a6e22e">getFieldErrors</span><span style="color:#f92672">().</span><span style="color:#a6e22e">forEach</span><span style="color:#f92672">((</span>item<span style="color:#f92672">)-&gt;{</span>
+                <span style="color:#75715e">//错误信息
+</span><span style="color:#75715e"></span>                String message <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getDefaultMessage</span><span style="color:#f92672">();</span>
+                <span style="color:#75715e">//错误属性名
+</span><span style="color:#75715e"></span>                String field <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getField</span><span style="color:#f92672">();</span>
+                map<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>field<span style="color:#f92672">,</span>message<span style="color:#f92672">);</span>
+            <span style="color:#f92672">});</span>
+            <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">error</span><span style="color:#f92672">(</span>400<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;提交数据不合法&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;data&#34;</span><span style="color:#f92672">,</span>map<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+            brandService<span style="color:#f92672">.</span><span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>brand<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><h2 id="总结">总结</h2>
+<pre><code>/**
+ * 1、整合MyBatis-Plus
+ *      1）、导入依赖
+ *      &lt;dependency&gt;
+ *             &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+ *             &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+ *             &lt;version&gt;3.2.0&lt;/version&gt;
+ *      &lt;/dependency&gt;
+ *      2）、配置
+ *          1、配置数据源；
+ *              1）、导入数据库的驱动。https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-versions.html
+ *              2）、在application.yml配置数据源相关信息
+ *          2、配置MyBatis-Plus；
+ *              1）、使用@MapperScan
+ *              2）、告诉MyBatis-Plus，sql映射文件位置
+ *
+ * 2、逻辑删除
+ *  1）、配置全局的逻辑删除规则（省略）
+ *  2）、配置逻辑删除的组件Bean（省略）
+ *  3）、给Bean加上逻辑删除注解@TableLogic
+ *
+ * 3、JSR303
+ *   1）、给Bean添加校验注解:javax.validation.constraints，并定义自己的message提示
+ *   2)、开启校验功能@Valid
+ *      效果：校验错误以后会有默认的响应；
+ *   3）、给校验的bean后紧跟一个BindingResult，就可以获取到校验的结果
+ *   4）、分组校验（多场景的复杂校验）
+ *         1)、	@NotBlank(message = &quot;品牌名必须提交&quot;,groups = {AddGroup.class,UpdateGroup.class})
+ *          给校验注解标注什么情况需要进行校验
+ *         2）、@Validated({AddGroup.class})
+ *         3)、默认没有指定分组的校验注解@NotBlank，在分组校验情况@Validated({AddGroup.class})下不生效，只会在@Validated生效；
+ *
+ *   5）、自定义校验
+ *      1）、编写一个自定义的校验注解
+ *      2）、编写一个自定义的校验器 ConstraintValidator
+ *      3）、关联自定义的校验器和自定义的校验注解
+         *      @Documented
+         * @Constraint(validatedBy = { ListValueConstraintValidator.class【可以指定多个不同的校验器，适配不同类型的校验】 })
+         * @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+         * @Retention(RUNTIME)
+         * public @interface ListValue {
+ *
+ * 4、统一的异常处理
+ * @ControllerAdvice
+ *  1）、编写异常处理类，使用@ControllerAdvice。
+ *  2）、使用@ExceptionHandler标注方法可以处理的异常。
+ */
+
+</code></pre><blockquote>
+<p>可以不带url但是如果带了就必须合法</p>
+</blockquote>
+<p>自定义注解</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Documented</span>
+<span style="color:#a6e22e">@Constraint</span><span style="color:#f92672">(</span>validatedBy <span style="color:#f92672">=</span> <span style="color:#f92672">{</span> ListValueConstraintValidator<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span> <span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@Target</span><span style="color:#f92672">({</span> METHOD<span style="color:#f92672">,</span> FIELD<span style="color:#f92672">,</span> ANNOTATION_TYPE<span style="color:#f92672">,</span> CONSTRUCTOR<span style="color:#f92672">,</span> PARAMETER<span style="color:#f92672">,</span> TYPE_USE <span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@Retention</span><span style="color:#f92672">(</span>RUNTIME<span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">@interface</span> ListValue <span style="color:#f92672">{</span>
+    String <span style="color:#a6e22e">message</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">default</span> <span style="color:#e6db74">&#34;{com.atguigu.common.valid.ListValue.message}&#34;</span><span style="color:#f92672">;</span>
+
+    Class<span style="color:#f92672">&lt;?&gt;[]</span> groups<span style="color:#f92672">()</span> <span style="color:#66d9ef">default</span> <span style="color:#f92672">{</span> <span style="color:#f92672">};</span>
+
+    Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> Payload<span style="color:#f92672">&gt;[]</span> <span style="color:#a6e22e">payload</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">default</span> <span style="color:#f92672">{</span> <span style="color:#f92672">};</span>
+
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">vals</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">default</span> <span style="color:#f92672">{</span> <span style="color:#f92672">};</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p><code>@JsonInclude(JsonInclude.Include.NON_EMPTY)</code>不是空时返回该字段信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">path<span style="color:#f92672">.</span><span style="color:#a6e22e">toArray</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Long<span style="color:#f92672">[</span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()]);</span><span style="color:#75715e">//List转数组
+</span><span style="color:#75715e"></span>Collections<span style="color:#f92672">.</span><span style="color:#a6e22e">reverse</span><span style="color:#f92672">(</span>parentPath<span style="color:#f92672">);</span><span style="color:#75715e">//翻转列表
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>关联表中有冗余数据需要同步更新，@Transactional级联更细需要事务控制</p>
+<p>涉及多张表的时候使用</p>
+<p>P76</p>
+<h2 id="object划分">Object划分</h2>
+<ul>
+<li>PO(persistant object) 对应数据库某表中的一条记录</li>
+<li>VO(value object)值对象</li>
+</ul>
+<h3 id="vo">VO</h3>
+<p>视图对象</p>
+<p>功能</p>
+<ul>
+<li>接收页面传递来的数据，封装成对象</li>
+<li>将业务处理完成的对象封装成页面要用的数据</li>
+</ul>
+<h3 id="dao">DAO</h3>
+<p>data access object</p>
+<p>数据库访问对象</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> IPage<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">page</span><span style="color:#f92672">(</span>IPage<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> page<span style="color:#f92672">,</span> Wrapper<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> queryWrapper<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">baseMapper</span><span style="color:#f92672">.</span><span style="color:#a6e22e">selectPage</span><span style="color:#f92672">(</span>page<span style="color:#f92672">,</span> queryWrapper<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><h2 id="mybatis-plus">Mybatis-Plus</h2>
+<p><strong>需要用@Param标注</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deleteBatchRelation</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@Param</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;entities&#34;</span><span style="color:#f92672">)</span> List<span style="color:#f92672">&lt;</span>AttrAttrgroupRelationEntity<span style="color:#f92672">&gt;</span> entities<span style="color:#f92672">);</span>
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@PostMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/attr/relation/delete&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> R <span style="color:#a6e22e">deleteRelation</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@RequestBody</span> AttrGroupRelationVo<span style="color:#f92672">[]</span> vos<span style="color:#f92672">){</span>
+    attrService<span style="color:#f92672">.</span><span style="color:#a6e22e">deleteRelation</span><span style="color:#f92672">(</span>vos<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>Post请求携带Json数据需要RequestBody才能转换</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>attrIds <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span>attrIds<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()==</span>0<span style="color:#f92672">){</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+</code></pre></div><blockquote>
+<p>每次查询后需要判断非空</p>
+</blockquote>
+<p><strong>不是Json数据的请求参数</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@RequestParam</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span>Object<span style="color:#f92672">&gt;</span> params
+
+</code></pre></div><p>前端传来的数据如果是可选项时要注意判断空指针，否则会出现空指针异常</p>
+<p>判断是空指针就不进行接下来的操作.</p>
+<p>87</p>
+<h2 id="保存逻辑">保存逻辑</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SpuSaveVo</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> String spuName<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String spuDescription<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Long catalogId<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Long brandId<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> BigDecimal weight<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> publishStatus<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> decript<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> images<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Bounds bounds<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>BaseAttrs<span style="color:#f92672">&gt;</span> baseAttrs<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Skus<span style="color:#f92672">&gt;</span> skus<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SpuInfoEntity</span> <span style="color:#66d9ef">implements</span> Serializable <span style="color:#f92672">{</span>
+	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> 1L<span style="color:#f92672">;</span>
+
+	<span style="color:#66d9ef">private</span> Long id<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> String spuName<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> String spuDescription<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Long catalogId<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Long brandId<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> BigDecimal weight<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Integer publishStatus<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Date createTime<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Date updateTime<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>还剩下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  
+    <span style="color:#66d9ef">private</span> Bounds bounds<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>BaseAttrs<span style="color:#f92672">&gt;</span> baseAttrs<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Skus<span style="color:#f92672">&gt;</span> skus<span style="color:#f92672">;</span>
+
+</code></pre></div><p>字符串拼接操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String<span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">,</span>decript<span style="color:#f92672">)</span>
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SkuInfoEntity</span> <span style="color:#66d9ef">implements</span> Serializable <span style="color:#f92672">{</span>
+	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> 1L<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Long skuId<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Long spuId<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> String skuName<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> String skuDesc<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Long catalogId<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Long brandId<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> String skuDefaultImg<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> String skuTitle<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> String skuSubtitle<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> BigDecimal price<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">private</span> Long saleCount<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Skus</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Attr<span style="color:#f92672">&gt;</span> attr<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String skuName<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> BigDecimal price<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String skuTitle<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String skuSubtitle<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>Images<span style="color:#f92672">&gt;</span> images<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> descar<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> fullCount<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> BigDecimal discount<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> countStatus<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> BigDecimal fullPrice<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> BigDecimal reducePrice<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> priceStatus<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>MemberPrice<span style="color:#f92672">&gt;</span> memberPrice<span style="color:#f92672">;</span>
+
+
+<span style="color:#f92672">}</span>
+
+</code></pre></div><h2 id="to">TO</h2>
+<p>A微服务向B微服务发出请求需要用的是传输模型，一般放在公共模块中，命名为TO</p>
+<h2 id="设置微服务内存大小">设置微服务内存大小</h2>
+<blockquote>
+<p>VM Options -Xms100m</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql"><span style="color:#66d9ef">SET</span> SESSION TRANSACTION ISOLATION LEVEL <span style="color:#66d9ef">READ</span> UNCOMMITTED;
+
+</code></pre></div><p>防止添加事务后调试不方便</p>
+<p>mybatis默认主键是自增的，所以如果要插入值会产生错误，故要调整</p>
+<h2 id="mysql连接数太多">mysql连接数太多</h2>
+<p><code>java.sql.SQLNonTransientConnectionException: Data source rejected establishment of connection,  mess</code></p>
+<p>解决方法重启mysql</p>
+<p>当前端传来的是0等默认数据时，不进行保存</p>
+<p>要先判断</p>
+<pre><code class="language-ya" data-lang="ya">  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//远程查询sku的名字 失败抛出异常不回滚
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">try</span><span style="color:#f92672">{</span>
+    R info <span style="color:#f92672">=</span> productFeignService<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span>skuId<span style="color:#f92672">);</span>
+    String skuName <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>String<span style="color:#f92672">)</span> info<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuInfo&#34;</span><span style="color:#f92672">);</span>
+    wareSkuEntity<span style="color:#f92672">.</span><span style="color:#a6e22e">setSkuName</span><span style="color:#f92672">(</span>skuName<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">){</span>
+    e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">            <span style="color:#75715e">//远程查询sku的名字 失败抛出异常不回滚
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">try</span><span style="color:#f92672">{</span>
+                R info <span style="color:#f92672">=</span> productFeignService<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span>skuId<span style="color:#f92672">);</span>
+                Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span>Object<span style="color:#f92672">&gt;</span> data <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Object<span style="color:#f92672">&gt;)</span> info<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuInfo&#34;</span><span style="color:#f92672">);</span>
+                wareSkuEntity<span style="color:#f92672">.</span><span style="color:#a6e22e">setSkuName</span><span style="color:#f92672">((</span>String<span style="color:#f92672">)</span> data<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuName&#34;</span><span style="color:#f92672">));</span>
+            <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">){</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+
+</code></pre></div><p>注意返回的JSON字符串会默认转换为HashMap 而不是对象</p>
+<h2 id="elasticsearch">ElasticSearch</h2>
+<h3 id="乐观锁操作">乐观锁操作</h3>
+<p><code>_seq_no</code>在每次请求修改后会+1，在高并发的情况下需要加上参数<code>if_seq_no=1</code>，只有当值符合的时候才能修改成功。</p>
+<p>post带_update 对比原来数据，如果没有变化则version序列号都不变</p>
+<p>没有删除type的操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#960050;background-color:#1e0010">GET</span> <span style="color:#960050;background-color:#1e0010">bank/_search</span>
+{
+  <span style="color:#f92672">&#34;query&#34;</span>: {
+    <span style="color:#f92672">&#34;match_all&#34;</span>: {}
+  },
+  <span style="color:#f92672">&#34;sort&#34;</span>: [
+    {
+      <span style="color:#f92672">&#34;account_number&#34;</span>: {
+        <span style="color:#f92672">&#34;order&#34;</span>: <span style="color:#e6db74">&#34;asc&#34;</span>
+      }
+    }
+  ]
+}
+
+</code></pre></div><p><strong>在正向索引中，文档占据了中心的位置，每个文档指向了一个它所包含的索引项的序列。也就是说文档指向了它包含的那些单词，而反向索引则是单词指向了包含它的文档，很容易看到这个反向的关系。</strong></p>
+<p>&ldquo;shoud&rdquo; 可以不满足，但是满足的得分较高</p>
+<p>filter不会贡献相关性得分</p>
+<p>term 精确字段，非文本字段</p>
+<p>keyword 精确匹配，不会分词</p>
+<p>P 128</p>
+<h3 id="整合springboot">整合Springboot</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insertIndex</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        IndexRequest indexRequest <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IndexRequest<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;users&#34;</span><span style="color:#f92672">);</span>
+        indexRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">);</span>
+        User user <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> User<span style="color:#f92672">();</span>
+        user<span style="color:#f92672">.</span><span style="color:#a6e22e">setName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Jane&#34;</span><span style="color:#f92672">);</span>
+        user<span style="color:#f92672">.</span><span style="color:#a6e22e">setAge</span><span style="color:#f92672">(</span>19<span style="color:#f92672">);</span>
+        String jsonString <span style="color:#f92672">=</span> JSON<span style="color:#f92672">.</span><span style="color:#a6e22e">toJSONString</span><span style="color:#f92672">(</span>user<span style="color:#f92672">);</span>
+        indexRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">source</span><span style="color:#f92672">(</span>jsonString<span style="color:#f92672">,</span>XContentType<span style="color:#f92672">.</span><span style="color:#a6e22e">JSON</span><span style="color:#f92672">);</span><span style="color:#75715e">//要保存的内容用source API
+</span><span style="color:#75715e"></span>        IndexResponse index <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span><span style="color:#a6e22e">index</span><span style="color:#f92672">(</span>indexRequest<span style="color:#f92672">,</span> MallElasticSearchConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">COMMON_OPTIONS</span><span style="color:#f92672">);</span><span style="color:#75715e">//发动请求,第二个参数是请求中的选项
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>index<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">searchData</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//创建检索请求
+</span><span style="color:#75715e"></span>        SearchRequest searchRequest <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SearchRequest<span style="color:#f92672">();</span>
+        searchRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">indices</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;bank&#34;</span><span style="color:#f92672">);</span>
+        searchRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">types</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;account&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">//指定检索条件
+</span><span style="color:#75715e"></span>        SearchSourceBuilder searchSourceBuilder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SearchSourceBuilder<span style="color:#f92672">();</span>
+        searchSourceBuilder<span style="color:#f92672">.</span><span style="color:#a6e22e">query</span><span style="color:#f92672">(</span>QueryBuilders<span style="color:#f92672">.</span><span style="color:#a6e22e">matchQuery</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;address&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;mill&#34;</span><span style="color:#f92672">));</span><span style="color:#75715e">//使用工具类创建QueryBuilder
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//创建聚合请求
+</span><span style="color:#75715e"></span>        TermsAggregationBuilder aggregation <span style="color:#f92672">=</span> AggregationBuilders<span style="color:#f92672">.</span><span style="color:#a6e22e">terms</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ageAgg&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">field</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+        aggregation<span style="color:#f92672">.</span><span style="color:#a6e22e">subAggregation</span><span style="color:#f92672">(</span>AggregationBuilders<span style="color:#f92672">.</span><span style="color:#a6e22e">avg</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;accountAvg&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">field</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;account_number&#34;</span><span style="color:#f92672">));</span>
+        searchSourceBuilder<span style="color:#f92672">.</span><span style="color:#a6e22e">aggregation</span><span style="color:#f92672">(</span>aggregation<span style="color:#f92672">);</span>
+        <span style="color:#75715e">//发出请求
+</span><span style="color:#75715e"></span>        searchRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">source</span><span style="color:#f92672">(</span>searchSourceBuilder<span style="color:#f92672">);</span>
+        SearchResponse response <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span><span style="color:#a6e22e">search</span><span style="color:#f92672">(</span>searchRequest<span style="color:#f92672">,</span> MallElasticSearchConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">COMMON_OPTIONS</span><span style="color:#f92672">);</span>
+
+
+        <span style="color:#75715e">//处理结果
+</span><span style="color:#75715e"></span>        SearchHits hits <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span><span style="color:#a6e22e">getHits</span><span style="color:#f92672">();</span>
+        SearchHit<span style="color:#f92672">[]</span> searchHits <span style="color:#f92672">=</span> hits<span style="color:#f92672">.</span><span style="color:#a6e22e">getHits</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>SearchHit hit <span style="color:#f92672">:</span> searchHits<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            String s <span style="color:#f92672">=</span> hit<span style="color:#f92672">.</span><span style="color:#a6e22e">getSourceAsString</span><span style="color:#f92672">();</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>s<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+        Aggregations aggregations <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span><span style="color:#a6e22e">getAggregations</span><span style="color:#f92672">();</span>
+        Terms ageAgg <span style="color:#f92672">=</span> aggregations<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ageAgg&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Terms<span style="color:#f92672">.</span><span style="color:#a6e22e">Bucket</span> bucket <span style="color:#f92672">:</span> ageAgg<span style="color:#f92672">.</span><span style="color:#a6e22e">getBuckets</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+            String keyAsString <span style="color:#f92672">=</span> bucket<span style="color:#f92672">.</span><span style="color:#a6e22e">getKeyAsString</span><span style="color:#f92672">();</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;年龄&#34;</span><span style="color:#f92672">+</span>keyAsString<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;-&gt;&#34;</span><span style="color:#f92672">+</span>bucket<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocCount</span><span style="color:#f92672">()+</span><span style="color:#e6db74">&#34;个人&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><p>nested嵌入式属性，否则因为扁平化处理会出现错误</p>
+<h2 id="mybatis">Mybatis</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;select</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;selectSearchAttrs&#34;</span> <span style="color:#a6e22e">resultType=</span><span style="color:#e6db74">&#34;java.lang.Long&#34;</span><span style="color:#f92672">&gt;</span>
+        SELECT attr_id FROM pms_attr WHERE attr_id IN  
+        <span style="color:#f92672">&lt;foreach</span> <span style="color:#a6e22e">collection=</span><span style="color:#e6db74">&#34;attrIds&#34;</span> <span style="color:#a6e22e">separator=</span><span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#a6e22e">open=</span><span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#a6e22e">close=</span><span style="color:#e6db74">&#34;)&#34;</span><span style="color:#f92672">&gt;</span>
+            #{id}
+        <span style="color:#f92672">&lt;/foreach&gt;</span>
+        AND search_type = 1
+    <span style="color:#f92672">&lt;/select&gt;</span>
+
+</code></pre></div><h2 id="业务代码">业务代码</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Set<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">&gt;</span> searchSet <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;&gt;(</span>searchAttrIds<span style="color:#f92672">);</span>
+        List<span style="color:#f92672">&lt;</span>ESSkuModel<span style="color:#f92672">.</span><span style="color:#a6e22e">Attr</span><span style="color:#f92672">&gt;</span> attrList <span style="color:#f92672">=</span> productAttrValueEntities<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">filter</span><span style="color:#f92672">(</span>item <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//从attrIds中过滤出所有符合searchAttrIds的值
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> searchSet<span style="color:#f92672">.</span><span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span>item<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttrId</span><span style="color:#f92672">());</span>
+        <span style="color:#f92672">})</span>
+
+</code></pre></div><p>泛型设计</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">R</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">extends</span> HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Object<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> 1L<span style="color:#f92672">;</span>
+
+	<span style="color:#66d9ef">private</span> T data<span style="color:#f92672">;</span>
+
+	<span style="color:#66d9ef">public</span> T <span style="color:#a6e22e">getData</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+		<span style="color:#66d9ef">return</span> data<span style="color:#f92672">;</span>
+	<span style="color:#f92672">}</span>
+
+	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setData</span><span style="color:#f92672">(</span>T data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+		<span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> data<span style="color:#f92672">;</span>
+	<span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>Hash表加速判断</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Map<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">,</span> Boolean<span style="color:#f92672">&gt;</span> collect <span style="color:#f92672">=</span> res<span style="color:#f92672">.</span><span style="color:#a6e22e">getData</span><span style="color:#f92672">().</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toMap</span><span style="color:#f92672">(</span>item <span style="color:#f92672">-&gt;</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getSkuId</span><span style="color:#f92672">(),</span> item <span style="color:#f92672">-&gt;</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">isHasStock</span><span style="color:#f92672">()));</span>
+
+
+</code></pre></div><p>远程调用需要try catch</p>
+<p>否则一旦出现异常，后面代码全部不能执行</p>
+<p><strong>疑问</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TypeReference<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>SkuHasStockVo<span style="color:#f92672">&gt;&gt;</span> typeReference <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TypeReference<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>SkuHasStockVo<span style="color:#f92672">&gt;&gt;(){};</span>
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">      access<span style="color:#f92672">-</span>key<span style="color:#f92672">:</span> LTAI4GH6YUaRR7mC3xAv141W
+      secret<span style="color:#f92672">-</span>key<span style="color:#f92672">:</span> P0M4V6CgXQ2fCrbPpR4aAzNQV8nTBo
+
+</code></pre></div><h2 id="nginx">Nginx</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">firewall-cmd --list-all <span style="color:#75715e">#查看防火墙的开放端口</span>
+firewall-cmd --add-port<span style="color:#f92672">=</span>80/tcp --permanent <span style="color:#75715e">#设置开放端口</span>
+firewall-cmd --reload <span style="color:#75715e">#重启防火墙</span>
+
+</code></pre></div><h3 id="nginxconf">nginx.conf</h3>
+<pre><code class="language-conf" data-lang="conf">http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    #配置上游服务器
+    upstream gulimall{
+        server 192.168.189.1:88;
+    }
+    server {
+        listen       80;
+        server_name  gulimall.com;
+        location / {
+                proxy_set_header HOST $host;  #请求头中host信息会随着nginx代理丢失，所以需要配置
+                proxy_pass http://gulimall;  #代理给上游服务器
+        }
+}
+
+</code></pre><h3 id="网关配置">网关配置</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">        - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">gulimall_host_route</span>
+          <span style="color:#f92672">uri</span>: <span style="color:#ae81ff">lb://gulimall-product</span>
+          <span style="color:#f92672">predicates</span>:
+            - <span style="color:#ae81ff">Host=**.gulimall.com</span>
+
+</code></pre></div><h2 id="调优参数">调优参数</h2>
+<pre><code>java **-Xmx3550m -Xms3550m -Xmn2g** **-Xss128k**
+**-**Xmx3550m**：设置JVM最大可用内存为3550M。
+
+**-Xms3550m**：设置JVM促使内存为3550m。此值可以设置与-Xmx相同，以避免每次垃圾回收完成后JVM重新分配内存。
+
+**-Xmn2g**：设置年轻代大小为2G。**整个JVM内存大小=年轻代大小 + 年老代大小 + 持久代大小**。持久代一般固定大小为64m，所以增大年轻代后，将会减小年老代大小。此值对系统性能影响较大，Sun官方推荐配置为整个堆的3/8。
+
+**-Xss128k**：设置每个线程的堆栈大小。JDK5.0以后每个线程堆栈大小为1M，以前每个线程堆栈大小为256K。更具应用的线程所需内存大小进行调整。在相同物理内存下，减小这个值能生成更多的线程。但是操作系统对一个进程内的线程数还是有限制的，不能无限生成，经验值在3000~5000左右。 
+
+</code></pre><p>中间件越多，性能损失越大，损失在网络交互；</p>
+<h2 id="docker">Docker</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install -y yum-utils
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum install docker-ce
+
+</code></pre></div><h3 id="设置开机自启">设置开机自启</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl enable docker
+
+</code></pre></div><h3 id="常用命令">常用命令</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>root@localhost src<span style="color:#f92672">]</span><span style="color:#75715e"># docker exec -it redis /bin/bash #进入docker容器内部，类似一个Linux</span>
+root@af2f99f3848f:/data# ls
+<span style="color:#f92672">[</span>root@localhost src<span style="color:#f92672">]</span><span style="color:#75715e"># docker exec -it redis redis-cli</span>
+127.0.0.1:6379&gt; 
+
+</code></pre></div><h2 id="动静分离">动静分离</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/usr/local/nginx/html
+
+</code></pre></div><h2 id="代码优化">代码优化</h2>
+<p>在循环中查询数据库因为每次都要连接数据库会导致开销过大</p>
+<p>优化方法</p>
+<ul>
+<li>调整为先将要查的数据封装成集合，然后一次连接数据库查询出所有信息</li>
+<li>先查出所有数据然后用代码进行筛选，总共查询一次数据库</li>
+</ul>
+<p>修改前</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 查出所有分类并封装成3级分类
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">getCatalogJson</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+
+        <span style="color:#75715e">//查出所有一级分类
+</span><span style="color:#75715e"></span>        List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> level1Categories <span style="color:#f92672">=</span> getLevel1Categories<span style="color:#f92672">();</span>
+        Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;&gt;</span> result <span style="color:#f92672">=</span> level1Categories<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toMap</span><span style="color:#f92672">(</span>k <span style="color:#f92672">-&gt;</span> k<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> v <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//查所有二级分类
+</span><span style="color:#75715e"></span>            List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> categoryEntities <span style="color:#f92672">=</span> baseMapper<span style="color:#f92672">.</span><span style="color:#a6e22e">selectList</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> QueryWrapper<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;().</span><span style="color:#a6e22e">eq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;parent_cid&#34;</span><span style="color:#f92672">,</span> v<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">()));</span>
+            List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;</span> calalog2Vos <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>categoryEntities <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                calalog2Vos <span style="color:#f92672">=</span> categoryEntities<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>item <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+                    Catalog2Vo catalog2Vo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Catalog2Vo<span style="color:#f92672">(</span>v<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+                    List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> level3Catalogs <span style="color:#f92672">=</span> baseMapper<span style="color:#f92672">.</span><span style="color:#a6e22e">selectList</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> QueryWrapper<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;().</span><span style="color:#a6e22e">eq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;parent_cid&#34;</span><span style="color:#f92672">,</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">()));</span>
+                    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>level3Catalogs<span style="color:#f92672">!=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
+                        List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">Catalog3Vo</span><span style="color:#f92672">&gt;</span> catalog3VoList <span style="color:#f92672">=</span> level3Catalogs<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>level3Catalog <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+                            Catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">Catalog3Vo</span> catalog3Vo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">Catalog3Vo</span><span style="color:#f92672">(</span>item<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> level3Catalog<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> level3Catalog<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+                            <span style="color:#66d9ef">return</span> catalog3Vo<span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}).</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toList</span><span style="color:#f92672">());</span>
+                        catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">setCatalog3List</span><span style="color:#f92672">(</span>catalog3VoList<span style="color:#f92672">);</span>
+                    <span style="color:#f92672">}</span>
+                    <span style="color:#66d9ef">return</span> catalog2Vo<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}).</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toList</span><span style="color:#f92672">());</span>
+
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> calalog2Vos<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}));</span>
+        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+
+
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><p>优化后</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 查出所有分类并封装成3级分类
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">getCatalogJson</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+
+        <span style="color:#75715e">//查出所有数据，用空间换时间
+</span><span style="color:#75715e"></span>        List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> selectList <span style="color:#f92672">=</span> baseMapper<span style="color:#f92672">.</span><span style="color:#a6e22e">selectList</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">//查出所有一级分类
+</span><span style="color:#75715e"></span>        List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> level1Categories <span style="color:#f92672">=</span> getChildren<span style="color:#f92672">(</span>selectList<span style="color:#f92672">,</span>0L<span style="color:#f92672">);</span>
+        Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;&gt;</span> result <span style="color:#f92672">=</span> level1Categories<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toMap</span><span style="color:#f92672">(</span>k <span style="color:#f92672">-&gt;</span> k<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> v <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//查所有二级分类
+</span><span style="color:#75715e"></span>            List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> categoryEntities <span style="color:#f92672">=</span> getChildren<span style="color:#f92672">(</span>selectList<span style="color:#f92672">,</span>v<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">());</span>
+            List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;</span> calalog2Vos <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>categoryEntities <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                calalog2Vos <span style="color:#f92672">=</span> categoryEntities<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>item <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+                    Catalog2Vo catalog2Vo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Catalog2Vo<span style="color:#f92672">(</span>v<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> item<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+                    List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> level3Catalogs <span style="color:#f92672">=</span> getChildren<span style="color:#f92672">(</span>selectList<span style="color:#f92672">,</span>item<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">());</span>
+                    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>level3Catalogs<span style="color:#f92672">!=</span><span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
+                        List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">Catalog3Vo</span><span style="color:#f92672">&gt;</span> catalog3VoList <span style="color:#f92672">=</span> level3Catalogs<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>level3Catalog <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+                            Catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">Catalog3Vo</span> catalog3Vo <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">Catalog3Vo</span><span style="color:#f92672">(</span>item<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> level3Catalog<span style="color:#f92672">.</span><span style="color:#a6e22e">getCatId</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">(),</span> level3Catalog<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+                            <span style="color:#66d9ef">return</span> catalog3Vo<span style="color:#f92672">;</span>
+                        <span style="color:#f92672">}).</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toList</span><span style="color:#f92672">());</span>
+                        catalog2Vo<span style="color:#f92672">.</span><span style="color:#a6e22e">setCatalog3List</span><span style="color:#f92672">(</span>catalog3VoList<span style="color:#f92672">);</span>
+                    <span style="color:#f92672">}</span>
+                    <span style="color:#66d9ef">return</span> catalog2Vo<span style="color:#f92672">;</span>
+                <span style="color:#f92672">}).</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toList</span><span style="color:#f92672">());</span>
+
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> calalog2Vos<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}));</span>
+        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
+
+
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 从categoryEntityList选出parentId符合的封装成List并返回
+</span><span style="color:#75715e">     * @param categoryEntityList
+</span><span style="color:#75715e">     * @param parentId
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getChildren</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> categoryEntityList<span style="color:#f92672">,</span>Long parentId<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        List<span style="color:#f92672">&lt;</span>CategoryEntity<span style="color:#f92672">&gt;</span> children <span style="color:#f92672">=</span> categoryEntityList<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">().</span><span style="color:#a6e22e">filter</span><span style="color:#f92672">(</span>categoryEntity <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> categoryEntity<span style="color:#f92672">.</span><span style="color:#a6e22e">getParentCid</span><span style="color:#f92672">().</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>parentId<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}).</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">(</span>Collectors<span style="color:#f92672">.</span><span style="color:#a6e22e">toList</span><span style="color:#f92672">());</span>
+        <span style="color:#66d9ef">return</span> children<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+
+</code></pre></div><p>堆外内存溢出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 1. SpringBoot2.0之后默认使用 lettuce 作为操作 redis 的客户端，lettuce 使用 Netty 进行网络通信
+</span><span style="color:#75715e">     * 2. lettuce 的 bug 导致 Netty 堆外内存溢出 -Xmx300m   Netty 如果没有指定对外内存 默认使用 JVM 设置的参数
+</span><span style="color:#75715e">     *      可以通过 -Dio.netty.maxDirectMemory 设置堆外内存
+</span><span style="color:#75715e">     * 解决方案：不能仅仅使用 -Dio.netty.maxDirectMemory 去调大堆外内存
+</span><span style="color:#75715e">     *      1. 升级 lettuce 客户端   2. 切换使用 jedis
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     *      RedisTemplate 对 lettuce 与 jedis 均进行了封装 所以直接使用 详情见：RedisAutoConfiguration 类
+</span><span style="color:#75715e">     */</span>
+
+</code></pre></div><h2 id="锁">锁</h2>
+<p>确认缓存有没有，查询数据库，将结果放入缓存作为原子性操作</p>
+<p>之前加锁，之后释放锁</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">[</span>root<span style="color:#a6e22e">@localhost</span> html<span style="color:#f92672">]</span><span style="color:#960050;background-color:#1e0010">#</span> docker exec <span style="color:#f92672">-</span>it redis redis<span style="color:#f92672">-</span>cli
+127<span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">.</span><span style="color:#a6e22e">0</span><span style="color:#f92672">.</span><span style="color:#a6e22e">1</span><span style="color:#f92672">:</span>6379<span style="color:#f92672">&gt;</span> set lock hello NX
+OK
+
+</code></pre></div><p>只有当不存在时候才能set，这是原子性操作(NX)</p>
+<h3 id="原子性">原子性</h3>
+<p>一系列命令全成功或者全失败</p>
+<h3 id="分布式锁">分布式锁</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * Redis使用分布式锁
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">public</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">getCatalogJsonFromDBWithRedisLock</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+
+        <span style="color:#75715e">//上锁
+</span><span style="color:#75715e"></span>        String uuid <span style="color:#f92672">=</span> UUID<span style="color:#f92672">.</span><span style="color:#a6e22e">randomUUID</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">();</span><span style="color:#75715e">//为保证在分布式系统中确认是自己的锁
+</span><span style="color:#75715e"></span>        Boolean lock <span style="color:#f92672">=</span> redisTemplate<span style="color:#f92672">.</span><span style="color:#a6e22e">opsForValue</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setIfAbsent</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lock&#34;</span><span style="color:#f92672">,</span> uuid<span style="color:#f92672">,</span> 300<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span><span style="color:#75715e">//原子性操作，只有一个线程能执行
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>lock<span style="color:#f92672">){</span>
+            <span style="color:#75715e">//得到锁并加锁成功
+</span><span style="color:#75715e"></span>            Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Catalog2Vo<span style="color:#f92672">&gt;&gt;</span> catalogJsonFromDB<span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//执行操作
+</span><span style="color:#75715e"></span>                catalogJsonFromDB <span style="color:#f92672">=</span> getCatalogJsonFromDB<span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span><span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//无论是否发生异常都要解锁
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//lua脚本原子性操作
+</span><span style="color:#75715e"></span>                String script <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;if redis.call(&#39;get&#39;, KEYS[1]) == ARGV[1] then return redis.call(&#39;del&#39;, KEYS[1]) else return 0 end&#34;</span><span style="color:#f92672">;</span>
+                redisTemplate<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> DefaultRedisScript<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">&gt;(</span>script<span style="color:#f92672">,</span> Long<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">),</span> Collections<span style="color:#f92672">.</span><span style="color:#a6e22e">singletonList</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lock&#34;</span><span style="color:#f92672">),</span> uuid<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> catalogJsonFromDB<span style="color:#f92672">;</span>
+
+        <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+            <span style="color:#75715e">//自旋等待锁
+</span><span style="color:#75715e"></span>            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>100<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> getCatalogJsonFromDBWithRedisLock<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+
+    <span style="color:#f92672">}</span>
+
+
+</code></pre></div><h3 id="读写锁">读写锁</h3>
+<p>只要有写操作，无论是先写还是后写都会阻塞</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 读写锁测试
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@RequestMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/write&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@ResponseBody</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">write</span><span style="color:#f92672">(){</span>
+        RReadWriteLock readWriteLock <span style="color:#f92672">=</span> redissonClient<span style="color:#f92672">.</span><span style="color:#a6e22e">getReadWriteLock</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rw-lock&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">//获取写锁
+</span><span style="color:#75715e"></span>        RLock rLock <span style="color:#f92672">=</span> readWriteLock<span style="color:#f92672">.</span><span style="color:#a6e22e">writeLock</span><span style="color:#f92672">();</span>
+        String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//上锁
+</span><span style="color:#75715e"></span>            rLock<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+            s <span style="color:#f92672">=</span> UUID<span style="color:#f92672">.</span><span style="color:#a6e22e">randomUUID</span><span style="color:#f92672">().</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">();</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>3000<span style="color:#f92672">);</span>
+            redisTemplate<span style="color:#f92672">.</span><span style="color:#a6e22e">opsForValue</span><span style="color:#f92672">().</span><span style="color:#a6e22e">set</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;write-value&#34;</span><span style="color:#f92672">,</span>s<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+            rLock<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> s<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@RequestMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/read&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@ResponseBody</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">read</span><span style="color:#f92672">(){</span>
+        RReadWriteLock readWriteLock <span style="color:#f92672">=</span> redissonClient<span style="color:#f92672">.</span><span style="color:#a6e22e">getReadWriteLock</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rw-lock&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">//获取写锁
+</span><span style="color:#75715e"></span>        RLock rLock <span style="color:#f92672">=</span> readWriteLock<span style="color:#f92672">.</span><span style="color:#a6e22e">readLock</span><span style="color:#f92672">();</span>
+        String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//上锁
+</span><span style="color:#75715e"></span>            rLock<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+            s <span style="color:#f92672">=</span> redisTemplate<span style="color:#f92672">.</span><span style="color:#a6e22e">opsForValue</span><span style="color:#f92672">().</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;write-value&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+            rLock<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> s<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><p>信号量可以用作系统的限流功能</p>
+<p>锁的粒度越细越好</p>
+<p>更新数据库后删除相应的缓存</p>
+<h2 id="自动配置过程">自动配置过程</h2>
+<p>1、选择导入哪种类型的配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CacheConfigurationImportSelector</span> <span style="color:#66d9ef">implements</span> ImportSelector <span style="color:#f92672">{</span>
+        CacheConfigurationImportSelector<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">public</span> String<span style="color:#f92672">[]</span> <span style="color:#a6e22e">selectImports</span><span style="color:#f92672">(</span>AnnotationMetadata importingClassMetadata<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            CacheType<span style="color:#f92672">[]</span> types <span style="color:#f92672">=</span> CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">values</span><span style="color:#f92672">();</span>
+            String<span style="color:#f92672">[]</span> imports <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[</span>types<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+
+            <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> types<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> <span style="color:#f92672">++</span>i<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                imports<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> CacheConfigurations<span style="color:#f92672">.</span><span style="color:#a6e22e">getConfigurationClass</span><span style="color:#f92672">(</span>types<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+            <span style="color:#f92672">}</span>
+
+            <span style="color:#66d9ef">return</span> imports<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CacheConfigurations</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Map<span style="color:#f92672">&lt;</span>CacheType<span style="color:#f92672">,</span> Class<span style="color:#f92672">&lt;?&gt;&gt;</span> MAPPINGS<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">CacheConfigurations</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getConfigurationClass</span><span style="color:#f92672">(</span>CacheType cacheType<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Class<span style="color:#f92672">&lt;?&gt;</span> configurationClass <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Class<span style="color:#f92672">)</span>MAPPINGS<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>cacheType<span style="color:#f92672">);</span>
+        Assert<span style="color:#f92672">.</span><span style="color:#a6e22e">state</span><span style="color:#f92672">(</span>configurationClass <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Unknown cache type &#34;</span> <span style="color:#f92672">+</span> cacheType<span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
+        <span style="color:#66d9ef">return</span> configurationClass<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> CacheType <span style="color:#a6e22e">getType</span><span style="color:#f92672">(</span>String configurationClassName<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Iterator var1 <span style="color:#f92672">=</span> MAPPINGS<span style="color:#f92672">.</span><span style="color:#a6e22e">entrySet</span><span style="color:#f92672">().</span><span style="color:#a6e22e">iterator</span><span style="color:#f92672">();</span>
+
+        Entry entry<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>var1<span style="color:#f92672">.</span><span style="color:#a6e22e">hasNext</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalStateException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Unknown configuration class &#34;</span> <span style="color:#f92672">+</span> configurationClassName<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+
+            entry <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Entry<span style="color:#f92672">)</span>var1<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">while</span><span style="color:#f92672">(!((</span>Class<span style="color:#f92672">)</span>entry<span style="color:#f92672">.</span><span style="color:#a6e22e">getValue</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">().</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>configurationClassName<span style="color:#f92672">));</span>
+
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>CacheType<span style="color:#f92672">)</span>entry<span style="color:#f92672">.</span><span style="color:#a6e22e">getKey</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+        Map<span style="color:#f92672">&lt;</span>CacheType<span style="color:#f92672">,</span> Class<span style="color:#f92672">&lt;?&gt;&gt;</span> mappings <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> EnumMap<span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">GENERIC</span><span style="color:#f92672">,</span> GenericCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">EHCACHE</span><span style="color:#f92672">,</span> EhCacheCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">HAZELCAST</span><span style="color:#f92672">,</span> HazelcastCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">INFINISPAN</span><span style="color:#f92672">,</span> InfinispanCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">JCACHE</span><span style="color:#f92672">,</span> JCacheCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">COUCHBASE</span><span style="color:#f92672">,</span> CouchbaseCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">REDIS</span><span style="color:#f92672">,</span> RedisCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">CAFFEINE</span><span style="color:#f92672">,</span> CaffeineCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">SIMPLE</span><span style="color:#f92672">,</span> SimpleCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        mappings<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>CacheType<span style="color:#f92672">.</span><span style="color:#a6e22e">NONE</span><span style="color:#f92672">,</span> NoOpCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        MAPPINGS <span style="color:#f92672">=</span> Collections<span style="color:#f92672">.</span><span style="color:#a6e22e">unmodifiableMap</span><span style="color:#f92672">(</span>mappings<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+
+</code></pre></div><p>从容器中找RedisCacheConfiguration，如果没有就使用默认配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Configuration</span>
+<span style="color:#a6e22e">@ConditionalOnClass</span><span style="color:#f92672">({</span>RedisConnectionFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@AutoConfigureAfter</span><span style="color:#f92672">({</span>RedisAutoConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@ConditionalOnBean</span><span style="color:#f92672">({</span>RedisConnectionFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@ConditionalOnMissingBean</span><span style="color:#f92672">({</span>CacheManager<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">})</span>
+<span style="color:#a6e22e">@Conditional</span><span style="color:#f92672">({</span>CacheCondition<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">})</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RedisCacheConfiguration</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> CacheProperties cacheProperties<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> CacheManagerCustomizers customizerInvoker<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> org<span style="color:#f92672">.</span><span style="color:#a6e22e">springframework</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redis</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">RedisCacheConfiguration</span> redisCacheConfiguration<span style="color:#f92672">;</span>
+
+    RedisCacheConfiguration<span style="color:#f92672">(</span>CacheProperties cacheProperties<span style="color:#f92672">,</span> CacheManagerCustomizers customizerInvoker<span style="color:#f92672">,</span> ObjectProvider<span style="color:#f92672">&lt;</span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">springframework</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redis</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">RedisCacheConfiguration</span><span style="color:#f92672">&gt;</span> redisCacheConfiguration<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cacheProperties</span> <span style="color:#f92672">=</span> cacheProperties<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">customizerInvoker</span> <span style="color:#f92672">=</span> customizerInvoker<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redisCacheConfiguration</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">springframework</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redis</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">RedisCacheConfiguration</span><span style="color:#f92672">)</span>redisCacheConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">getIfAvailable</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+	
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> RedisCacheManager <span style="color:#a6e22e">cacheManager</span><span style="color:#f92672">(</span>RedisConnectionFactory redisConnectionFactory<span style="color:#f92672">,</span> ResourceLoader resourceLoader<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        RedisCacheManagerBuilder builder <span style="color:#f92672">=</span> RedisCacheManager<span style="color:#f92672">.</span><span style="color:#a6e22e">builder</span><span style="color:#f92672">(</span>redisConnectionFactory<span style="color:#f92672">).</span><span style="color:#a6e22e">cacheDefaults</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">determineConfiguration</span><span style="color:#f92672">(</span>resourceLoader<span style="color:#f92672">.</span><span style="color:#a6e22e">getClassLoader</span><span style="color:#f92672">()));</span>
+        List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> cacheNames <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cacheProperties</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getCacheNames</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>cacheNames<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+            builder<span style="color:#f92672">.</span><span style="color:#a6e22e">initialCacheNames</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> LinkedHashSet<span style="color:#f92672">(</span>cacheNames<span style="color:#f92672">));</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>RedisCacheManager<span style="color:#f92672">)</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">customizerInvoker</span><span style="color:#f92672">.</span><span style="color:#a6e22e">customize</span><span style="color:#f92672">(</span>builder<span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> org<span style="color:#f92672">.</span><span style="color:#a6e22e">springframework</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redis</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">RedisCacheConfiguration</span> <span style="color:#a6e22e">determineConfiguration</span><span style="color:#f92672">(</span>ClassLoader classLoader<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redisCacheConfiguration</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redisCacheConfiguration</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            Redis redisProperties <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cacheProperties</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getRedis</span><span style="color:#f92672">();</span>
+            org<span style="color:#f92672">.</span><span style="color:#a6e22e">springframework</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redis</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">RedisCacheConfiguration</span> config <span style="color:#f92672">=</span> org<span style="color:#f92672">.</span><span style="color:#a6e22e">springframework</span><span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">.</span><span style="color:#a6e22e">redis</span><span style="color:#f92672">.</span><span style="color:#a6e22e">cache</span><span style="color:#f92672">.</span><span style="color:#a6e22e">RedisCacheConfiguration</span><span style="color:#f92672">.</span><span style="color:#a6e22e">defaultCacheConfig</span><span style="color:#f92672">();</span>
+            config <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span><span style="color:#a6e22e">serializeValuesWith</span><span style="color:#f92672">(</span>SerializationPair<span style="color:#f92672">.</span><span style="color:#a6e22e">fromSerializer</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> JdkSerializationRedisSerializer<span style="color:#f92672">(</span>classLoader<span style="color:#f92672">)));</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>redisProperties<span style="color:#f92672">.</span><span style="color:#a6e22e">getTimeToLive</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                config <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span><span style="color:#a6e22e">entryTtl</span><span style="color:#f92672">(</span>redisProperties<span style="color:#f92672">.</span><span style="color:#a6e22e">getTimeToLive</span><span style="color:#f92672">());</span>
+            <span style="color:#f92672">}</span>
+
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>redisProperties<span style="color:#f92672">.</span><span style="color:#a6e22e">getKeyPrefix</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                config <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span><span style="color:#a6e22e">prefixKeysWith</span><span style="color:#f92672">(</span>redisProperties<span style="color:#f92672">.</span><span style="color:#a6e22e">getKeyPrefix</span><span style="color:#f92672">());</span>
+            <span style="color:#f92672">}</span>
+
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>redisProperties<span style="color:#f92672">.</span><span style="color:#a6e22e">isCacheNullValues</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+                config <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span><span style="color:#a6e22e">disableCachingNullValues</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>redisProperties<span style="color:#f92672">.</span><span style="color:#a6e22e">isUseKeyPrefix</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+                config <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span><span style="color:#a6e22e">disableKeyPrefix</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+
+            <span style="color:#66d9ef">return</span> config<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+
+</code></pre></div><p>JavaBean中的属性与配置文件中的值进行绑定</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@ConfigurationProperties</span><span style="color:#f92672">(</span>
+    prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spring.cache&#34;</span>
+<span style="color:#f92672">)</span>
+
+
+</code></pre></div><p>防止缓存穿透</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#ae81ff">spring.cache.redis.cache-null-values=true</span>
+
+</code></pre></div><h2 id="springcache">SpringCache</h2>
+<h3 id="常用注解">常用注解</h3>
+<ul>
+<li><code>@Cacheable</code>: Triggers cache population.</li>
+<li><code>@CacheEvict</code>: Triggers cache eviction. 失效模式下 更新的方法上使用</li>
+<li><code>@CachePut</code>: Updates the cache without interfering with the method execution.</li>
+<li><code>@Caching</code>: Regroups multiple cache operations to be applied on a method. 组合多个注解</li>
+<li><code>@CacheConfig</code>: Shares some common cache-related settings at class-level.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@CacheEvict</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;category&#34;</span><span style="color:#f92672">,</span>key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#39;getLevel1Categories&#39;&#34;</span><span style="color:#f92672">)</span>
+
+</code></pre></div><p>key如果使用的是el表达式需要加上''</p>
+<pre><code>access-key: LTAI4GH6YUaRR7mC3xAv141W
+secret-key: P0M4V6CgXQ2fCrbPpR4aAzNQV8nTBo
+
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//将ThreadPoolConfigProperties加入容器中
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@EnableConfigurationProperties</span><span style="color:#f92672">(</span>ThreadPoolConfigProperties<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Component</span>
+<span style="color:#75715e">//两个注解的作用相同，只能标注其中的一个，否则容器中存在2个相同的bean会报错
+</span><span style="color:#75715e"></span>
+
+</code></pre></div><h2 id="转发常见问题">转发常见问题</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">redirectAttributes<span style="color:#f92672">.</span><span style="color:#a6e22e">addAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuId&#34;</span><span style="color:#f92672">,</span>skuId<span style="color:#f92672">);</span> <span style="color:#75715e">//在session中存储数据，且只能取一次，在页面取出
+</span><span style="color:#75715e"></span>redirectAttributes<span style="color:#f92672">.</span><span style="color:#a6e22e">addFlashAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuId&#34;</span><span style="color:#f92672">,</span>skuId<span style="color:#f92672">);</span><span style="color:#75715e">//数据会拼在url地址中作为参数
+</span><span style="color:#75715e"></span>
+</code></pre></div><h3 id="示例-1">示例</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/addToCart&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">addToCart</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@RequestParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuId&#34;</span><span style="color:#f92672">)</span>Long skuId<span style="color:#f92672">,</span>
+                            <span style="color:#a6e22e">@RequestParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;num&#34;</span><span style="color:#f92672">)</span> Integer num<span style="color:#f92672">,</span>
+                            RedirectAttributes redirectAttributes<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            CartItem item <span style="color:#f92672">=</span> cartService<span style="color:#f92672">.</span><span style="color:#a6e22e">addToCart</span><span style="color:#f92672">(</span>skuId<span style="color:#f92672">,</span>num<span style="color:#f92672">);</span>
+            redirectAttributes<span style="color:#f92672">.</span><span style="color:#a6e22e">addAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuId&#34;</span><span style="color:#f92672">,</span>skuId<span style="color:#f92672">);</span>
+            redirectAttributes<span style="color:#f92672">.</span><span style="color:#a6e22e">addFlashAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;skuId&#34;</span><span style="color:#f92672">,</span>skuId<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;redirect:http://cart.gulimall.com/addToCartSuccess.html&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><p>添加购物车和显示购物车需要经过重定向，否则用户刷新页面就会增加商品</p>
+<h2 id="rabbitmq">RabbitMq</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 源码中使用ObjectProvider查询容器中是否有MessageConverter如果有就用容器中的
+</span><span style="color:#75715e">     * 没有就用默认的
+</span><span style="color:#75715e">     * @return
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> MessageConverter <span style="color:#a6e22e">messageConverter</span><span style="color:#f92672">(){</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Jackson2JsonMessageConverter<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><p>配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">  <span style="color:#f92672">rabbitmq</span>:
+    <span style="color:#f92672">host</span>: <span style="color:#ae81ff">192.168.91.128</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">5672</span>
+    <span style="color:#f92672">virtual-host</span>: <span style="color:#ae81ff">/</span>
+    <span style="color:#f92672">publisher-confirms</span>: <span style="color:#66d9ef">true</span>  <span style="color:#75715e">#发送端确认，到达broker</span>
+    <span style="color:#f92672">publisher-returns</span>: <span style="color:#66d9ef">true</span>   <span style="color:#75715e">#抵达队列确认</span>
+    <span style="color:#f92672">template</span>:
+      <span style="color:#f92672">mandatory</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">listener</span>:
+      <span style="color:#f92672">direct</span>:
+        <span style="color:#f92672">acknowledge-mode</span>: <span style="color:#ae81ff">manual</span> <span style="color:#75715e">#手动ACK,防宕机</span>
+
+</code></pre></div><h2 id="windows查看端口占用情况">Windows查看端口占用情况</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">netstat -ano|findstr 9000
+tasklist|findstr 19796
+taskkill -pid (进程pid) -f
+
+</code></pre></div><h1 id="面试做此项目遇到的问题和解决方法">面试：做此项目遇到的问题和解决方法</h1>
+<h2 id="feign">Feign</h2>
+<p>注意远程调用接口时候需要<code>@ResponseBody</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/currentUserCartItem&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@ResponseBody</span>
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>CartItem<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getCurrentUserCartItem</span><span style="color:#f92672">(){</span>
+        <span style="color:#66d9ef">return</span> cartService<span style="color:#f92672">.</span><span style="color:#a6e22e">getCurrentUserCartItem</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+</code></pre></div><p>通过分析Feign的源码可知，Feign会根据程序编写的拦截器构造一个Request请求</p>
+<p>如果没有配置拦截器就用默认的，此时的Http Request 没有header 和 Body</p>
+<p>所以会丢失请求头</p>
+<p>:P268</p>
+<h2 id="springboot注意事项">Springboot注意事项</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@ResponseBody</span>
+<span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/payOrder&#34;</span> <span style="color:#f92672">,</span> produces <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;text/html&#34;</span><span style="color:#f92672">)</span>
+
+</code></pre></div><p>注释表明返回的ResponseBody的格式是html</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a6e22e">@GetMapping</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/order/order/listWithItem&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> R <span style="color:#a6e22e">listWithItem</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@RequestBody</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span>Object<span style="color:#f92672">&gt;</span> params<span style="color:#f92672">);</span>
+
+</code></pre></div><p>远程调用建议用Json方式传递参数</p>
+<p>每次远程调用都使用<code>@PostMapping</code>和<code>@RequestBody</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">    <span style="color:#f92672">listener</span>:
+      <span style="color:#f92672">direct</span>:
+        <span style="color:#f92672">acknowledge-mode</span>: <span style="color:#ae81ff">manual</span> <span style="color:#75715e">#手动ACK,防宕机</span>
+      <span style="color:#f92672">simple</span>:
+        <span style="color:#f92672">acknowledge-mode</span>: <span style="color:#ae81ff">manual</span>
+
+</code></pre></div><p>必须配置手动签收，否则手动ack后会ERROR</p>
+<h2 id="vmware问题">VMWARE问题</h2>
+<p>eth33网卡的IP地址默认是动态分配的所以需要手动设置成静态</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

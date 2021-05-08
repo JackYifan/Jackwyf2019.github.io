@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on My New Hugo Site</title>
+    <link>https://Jackwyf2019.github.io/post/</link>
+    <description>Recent content in Posts on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 May 2021 19:40:20 +0800</lastBuildDate><atom:link href="https://Jackwyf2019.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gulimall笔记</title>
+      <link>https://Jackwyf2019.github.io/post/blog/</link>
+      <pubDate>Sat, 08 May 2021 19:40:20 +0800</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/post/blog/</guid>
+      <description>CORS 跨域：协议，域名，端口任意一个不同都会导致跨域
+Request Method:OPTIONS 预检请求 nginx部署为同一个域 响应头允许跨域 使用Springboot提供的filter
+@Bean public CorsWebFilter corsWebFilter(){ UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); CorsConfiguration corsConfiguration = new CorsConfiguration(); //1、配置跨域  corsConfiguration.addAllowedHeader(&amp;#34;*&amp;#34;); corsConfiguration.addAllowedMethod(&amp;#34;*&amp;#34;); corsConfiguration.addAllowedOrigin(&amp;#34;*&amp;#34;); corsConfiguration.setAllowCredentials(true); //注册配置  source.registerCorsConfiguration(&amp;#34;/**&amp;#34;,corsConfiguration); return new CorsWebFilter(source); } Stream @Override public List&amp;lt;CategoryEntity&amp;gt; listTree() { //查询出所有项  List&amp;lt;CategoryEntity&amp;gt; entities = baseMapper.selectList(null); //查出所有项的根结点  List&amp;lt;CategoryEntity&amp;gt; roots = entities.stream().filter((entity) -&amp;gt; { return entity.getParentCid() == 0; }).map((root) -&amp;gt; { root.setChildren(getChildren(root, entities)); return root; }).sorted((e1, e2) -&amp;gt; { return (e1.</description>
+    </item>
+    
+  </channel>
+</rss>
