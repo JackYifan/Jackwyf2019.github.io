@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='A brief description of Gulimall development'><title>Gulimall笔记</title>
+
+<link rel='canonical' href='https://Jackwyf2019.github.io/p/gulimall%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Gulimall笔记'>
+<meta property='og:description' content='A brief description of Gulimall development'>
+<meta property='og:url' content='https://Jackwyf2019.github.io/p/gulimall%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='Jack Wu'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Gulimall' />
+<meta name="twitter:title" content="Gulimall笔记">
+<meta name="twitter:description" content="A brief description of Gulimall development">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7b858fa9a1a1bc01a029ef015334f1d2_31087_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://Jackwyf2019.github.io/">Jack Wu</a></h1>
+        <h2 class="site-description">Welcome to my blog.</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://Jackwyf2019.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/gulimall%E7%AC%94%E8%AE%B0/">Gulimall笔记</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        A brief description of Gulimall development
+    </h3>
+    </div>
+</header>
+
+    <section class="article-content">
+    <h2 id="cors">CORS</h2>
+<p>跨域：协议，域名，端口任意一个不同都会导致跨域</p>
+<pre><code>Request Method:OPTIONS
+预检请求
+nginx部署为同一个域
+响应头允许跨域
+</code></pre><p>使用Springboot提供的filter</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">CorsWebFilter</span> <span class="nf">corsWebFilter</span><span class="o">(){</span>
+        <span class="n">UrlBasedCorsConfigurationSource</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UrlBasedCorsConfigurationSource</span><span class="o">();</span>
+
+        <span class="n">CorsConfiguration</span> <span class="n">corsConfiguration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CorsConfiguration</span><span class="o">();</span>
+
+        <span class="c1">//1、配置跨域
+</span><span class="c1"></span>        <span class="n">corsConfiguration</span><span class="o">.</span><span class="na">addAllowedHeader</span><span class="o">(</span><span class="s">&#34;*&#34;</span><span class="o">);</span>
+        <span class="n">corsConfiguration</span><span class="o">.</span><span class="na">addAllowedMethod</span><span class="o">(</span><span class="s">&#34;*&#34;</span><span class="o">);</span>
+        <span class="n">corsConfiguration</span><span class="o">.</span><span class="na">addAllowedOrigin</span><span class="o">(</span><span class="s">&#34;*&#34;</span><span class="o">);</span>
+        <span class="n">corsConfiguration</span><span class="o">.</span><span class="na">setAllowCredentials</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+		<span class="c1">//注册配置
+</span><span class="c1"></span>        <span class="n">source</span><span class="o">.</span><span class="na">registerCorsConfiguration</span><span class="o">(</span><span class="s">&#34;/**&#34;</span><span class="o">,</span><span class="n">corsConfiguration</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">CorsWebFilter</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div><h2 id="stream">Stream</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="nf">listTree</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">//查询出所有项
+</span><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">entities</span> <span class="o">=</span> <span class="n">baseMapper</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+        <span class="c1">//查出所有项的根结点
+</span><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">roots</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">((</span><span class="n">entity</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="k">return</span> <span class="n">entity</span><span class="o">.</span><span class="na">getParentCid</span><span class="o">()</span> <span class="o">==</span> <span class="n">0</span><span class="o">;</span>
+                <span class="o">}).</span><span class="na">map</span><span class="o">((</span><span class="n">root</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="n">root</span><span class="o">.</span><span class="na">setChildren</span><span class="o">(</span><span class="n">getChildren</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">entities</span><span class="o">));</span>
+                    <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
+                <span class="o">}).</span><span class="na">sorted</span><span class="o">((</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="k">return</span> <span class="o">(</span><span class="n">e1</span><span class="o">.</span><span class="na">getSort</span><span class="o">()==</span><span class="kc">null</span><span class="o">?</span><span class="n">0</span><span class="o">:</span><span class="n">e1</span><span class="o">.</span><span class="na">getSort</span><span class="o">())-(</span><span class="n">e2</span><span class="o">.</span><span class="na">getSort</span><span class="o">()==</span><span class="kc">null</span><span class="o">?</span><span class="n">0</span><span class="o">:</span><span class="n">e2</span><span class="o">.</span><span class="na">getSort</span><span class="o">());</span>
+                <span class="o">}).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">roots</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div><p><code>.sorted</code>需要判空，因为可能list中没有数据或者只有一个数据</p>
+<p><code>.map</code>如果流总没有数据则不执行所以最优collect的list是<code>[]</code></p>
+<h2 id="gateway">gateway</h2>
+<p>路径重写</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="w">        </span>- <span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">product_route</span><span class="w">
+</span><span class="w">          </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l">lb://gulimall-product</span><span class="w">
+</span><span class="w">          </span><span class="nt">predicates</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="l">Path=/api/product/**</span><span class="w">
+</span><span class="w">          </span><span class="nt">filters</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="l">RewritePath=/api/(?&lt;segment&gt;.*),/$\{segment}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@EnableDiscoveryClient</span> <span class="n">开启注册发现功能</span>
+</code></pre></div><p>精确的路由需要放在高优先级</p>
+<h2 id="springboot">Springboot</h2>
+<p><code>@RequestBody</code> 获取请求体，必须发送POST请求</p>
+<p>将请求体中的数据（JSON）转换为相应的对象</p>
+<blockquote>
+<p>两个等价的注解</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/catelog/list&#34;</span><span class="o">,</span><span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/catelog/list&#34;</span><span class="o">)</span>
+</code></pre></div><h2 id="校验">校验</h2>
+<p>JSR303 javax.</p>
+<p>@NotBlank @Valid</p>
+<p><code>@NotBlank(message = &quot;品牌名必须提交&quot;)</code></p>
+<p>错误信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;timestamp&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-02-09 09:10:14&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;status&#34;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+    <span class="nt">&#34;error&#34;</span><span class="p">:</span> <span class="s2">&#34;Bad Request&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;errors&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;codes&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;NotBlank.brandEntity.name&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;NotBlank.name&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;NotBlank.java.lang.String&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;NotBlank&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;arguments&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&#34;codes&#34;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="s2">&#34;brandEntity.name&#34;</span><span class="p">,</span>
+                        <span class="s2">&#34;name&#34;</span>
+                    <span class="p">],</span>
+                    <span class="nt">&#34;arguments&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                    <span class="nt">&#34;defaultMessage&#34;</span><span class="p">:</span> <span class="s2">&#34;name&#34;</span><span class="p">,</span>
+                    <span class="nt">&#34;code&#34;</span><span class="p">:</span> <span class="s2">&#34;name&#34;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;defaultMessage&#34;</span><span class="p">:</span> <span class="s2">&#34;不能为空&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;objectName&#34;</span><span class="p">:</span> <span class="s2">&#34;brandEntity&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;field&#34;</span><span class="p">:</span> <span class="s2">&#34;name&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;rejectedValue&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;bindingFailure&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&#34;code&#34;</span><span class="p">:</span> <span class="s2">&#34;NotBlank&#34;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Validation failed for object=&#39;brandEntity&#39;. Error count: 1&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;/product/brand/save&#34;</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/save&#34;</span><span class="o">)</span>
+    <span class="c1">//@RequiresPermissions(&#34;product:brand:save&#34;)
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">R</span> <span class="nf">save</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="n">BrandEntity</span> <span class="n">brand</span><span class="o">,</span> <span class="n">BindingResult</span> <span class="n">result</span><span class="o">){</span>
+		<span class="n">brandService</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">brand</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">R</span><span class="o">.</span><span class="na">ok</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div><blockquote>
+<p>BindingResult 存校验结果</p>
+</blockquote>
+<h3 id="示例">示例</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Data</span>
+<span class="nd">@TableName</span><span class="o">(</span><span class="s">&#34;pms_brand&#34;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BrandEntity</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">1L</span><span class="o">;</span>
+
+	<span class="cm">/**
+</span><span class="cm">	 * 品牌id
+</span><span class="cm">	 */</span>
+	<span class="nd">@TableId</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">brandId</span><span class="o">;</span>
+	<span class="cm">/**
+</span><span class="cm">	 * 品牌名
+</span><span class="cm">	 */</span>
+	<span class="nd">@NotBlank</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">&#34;品牌名必须提交&#34;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="cm">/**
+</span><span class="cm">	 * 品牌logo地址
+</span><span class="cm">	 */</span>
+	<span class="nd">@NotEmpty</span>
+	<span class="nd">@URL</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">&#34;logo必须是一个合法的url地址&#34;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">logo</span><span class="o">;</span>
+	<span class="cm">/**
+</span><span class="cm">	 * 介绍
+</span><span class="cm">	 */</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">descript</span><span class="o">;</span>
+	<span class="cm">/**
+</span><span class="cm">	 * 显示状态[0-不显示；1-显示]
+</span><span class="cm">	 */</span>
+	<span class="kd">private</span> <span class="n">Integer</span> <span class="n">showStatus</span><span class="o">;</span>
+	<span class="cm">/**
+</span><span class="cm">	 * 检索首字母
+</span><span class="cm">	 */</span>
+	<span class="nd">@NotEmpty</span>
+	<span class="nd">@Pattern</span><span class="o">(</span><span class="n">regexp</span> <span class="o">=</span> <span class="s">&#34;/^[a-zA-Z]$/&#34;</span><span class="o">,</span><span class="n">message</span> <span class="o">=</span> <span class="s">&#34;检索首字母必须是一个字母&#34;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">firstLetter</span><span class="o">;</span>
+	<span class="cm">/**
+</span><span class="cm">	 * 排序
+</span><span class="cm">	 */</span>
+	<span class="nd">@NotNull</span>
+	<span class="nd">@Min</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">0</span><span class="o">,</span><span class="n">message</span> <span class="o">=</span> <span class="s">&#34;排序必须大于0&#34;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">Integer</span> <span class="n">sort</span><span class="o">;</span>
+
+<span class="o">}</span>
+
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">   <span class="cm">/**
+</span><span class="cm">     * 保存
+</span><span class="cm">     */</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/save&#34;</span><span class="o">)</span>
+    <span class="c1">//@RequiresPermissions(&#34;product:brand:save&#34;)
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">R</span> <span class="nf">save</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="n">BrandEntity</span> <span class="n">brand</span><span class="o">,</span> <span class="n">BindingResult</span> <span class="n">result</span><span class="o">){</span>
+        <span class="c1">//校验
+</span><span class="c1"></span>        <span class="k">if</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">hasErrors</span><span class="o">()){</span>
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="c1">//遍历所有属性错误
+</span><span class="c1"></span>            <span class="n">result</span><span class="o">.</span><span class="na">getFieldErrors</span><span class="o">().</span><span class="na">forEach</span><span class="o">((</span><span class="n">item</span><span class="o">)-&gt;{</span>
+                <span class="c1">//错误信息
+</span><span class="c1"></span>                <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="na">getDefaultMessage</span><span class="o">();</span>
+                <span class="c1">//错误属性名
+</span><span class="c1"></span>                <span class="n">String</span> <span class="n">field</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="na">getField</span><span class="o">();</span>
+                <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">field</span><span class="o">,</span><span class="n">message</span><span class="o">);</span>
+            <span class="o">});</span>
+            <span class="k">return</span> <span class="n">R</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">400</span><span class="o">,</span><span class="s">&#34;提交数据不合法&#34;</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;data&#34;</span><span class="o">,</span><span class="n">map</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+            <span class="n">brandService</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">brand</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">R</span><span class="o">.</span><span class="na">ok</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div><h2 id="总结">总结</h2>
+<pre><code>/**
+ * 1、整合MyBatis-Plus
+ *      1）、导入依赖
+ *      &lt;dependency&gt;
+ *             &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+ *             &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+ *             &lt;version&gt;3.2.0&lt;/version&gt;
+ *      &lt;/dependency&gt;
+ *      2）、配置
+ *          1、配置数据源；
+ *              1）、导入数据库的驱动。https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-versions.html
+ *              2）、在application.yml配置数据源相关信息
+ *          2、配置MyBatis-Plus；
+ *              1）、使用@MapperScan
+ *              2）、告诉MyBatis-Plus，sql映射文件位置
+ *
+ * 2、逻辑删除
+ *  1）、配置全局的逻辑删除规则（省略）
+ *  2）、配置逻辑删除的组件Bean（省略）
+ *  3）、给Bean加上逻辑删除注解@TableLogic
+ *
+ * 3、JSR303
+ *   1）、给Bean添加校验注解:javax.validation.constraints，并定义自己的message提示
+ *   2)、开启校验功能@Valid
+ *      效果：校验错误以后会有默认的响应；
+ *   3）、给校验的bean后紧跟一个BindingResult，就可以获取到校验的结果
+ *   4）、分组校验（多场景的复杂校验）
+ *         1)、	@NotBlank(message = &quot;品牌名必须提交&quot;,groups = {AddGroup.class,UpdateGroup.class})
+ *          给校验注解标注什么情况需要进行校验
+ *         2）、@Validated({AddGroup.class})
+ *         3)、默认没有指定分组的校验注解@NotBlank，在分组校验情况@Validated({AddGroup.class})下不生效，只会在@Validated生效；
+ *
+ *   5）、自定义校验
+ *      1）、编写一个自定义的校验注解
+ *      2）、编写一个自定义的校验器 ConstraintValidator
+ *      3）、关联自定义的校验器和自定义的校验注解
+         *      @Documented
+         * @Constraint(validatedBy = { ListValueConstraintValidator.class【可以指定多个不同的校验器，适配不同类型的校验】 })
+         * @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+         * @Retention(RUNTIME)
+         * public @interface ListValue {
+ *
+ * 4、统一的异常处理
+ * @ControllerAdvice
+ *  1）、编写异常处理类，使用@ControllerAdvice。
+ *  2）、使用@ExceptionHandler标注方法可以处理的异常。
+ */
+
+</code></pre><blockquote>
+<p>可以不带url但是如果带了就必须合法</p>
+</blockquote>
+<p>自定义注解</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Documented</span>
+<span class="nd">@Constraint</span><span class="o">(</span><span class="n">validatedBy</span> <span class="o">=</span> <span class="o">{</span> <span class="n">ListValueConstraintValidator</span><span class="o">.</span><span class="na">class</span> <span class="o">})</span>
+<span class="nd">@Target</span><span class="o">({</span> <span class="n">METHOD</span><span class="o">,</span> <span class="n">FIELD</span><span class="o">,</span> <span class="n">ANNOTATION_TYPE</span><span class="o">,</span> <span class="n">CONSTRUCTOR</span><span class="o">,</span> <span class="n">PARAMETER</span><span class="o">,</span> <span class="n">TYPE_USE</span> <span class="o">})</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RUNTIME</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">ListValue</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="nf">message</span><span class="o">()</span> <span class="k">default</span> <span class="s">&#34;{com.atguigu.common.valid.ListValue.message}&#34;</span><span class="o">;</span>
+
+    <span class="n">Class</span><span class="o">&lt;?&gt;[]</span> <span class="n">groups</span><span class="o">()</span> <span class="k">default</span> <span class="o">{</span> <span class="o">};</span>
+
+    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Payload</span><span class="o">&gt;[]</span> <span class="nf">payload</span><span class="o">()</span> <span class="k">default</span> <span class="o">{</span> <span class="o">};</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="nf">vals</span><span class="o">()</span> <span class="k">default</span> <span class="o">{</span> <span class="o">};</span>
+<span class="o">}</span>
+
+</code></pre></div><p><code>@JsonInclude(JsonInclude.Include.NON_EMPTY)</code>不是空时返回该字段信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">path</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="n">Long</span><span class="o">[</span><span class="n">path</span><span class="o">.</span><span class="na">size</span><span class="o">()]);</span><span class="c1">//List转数组
+</span><span class="c1"></span><span class="n">Collections</span><span class="o">.</span><span class="na">reverse</span><span class="o">(</span><span class="n">parentPath</span><span class="o">);</span><span class="c1">//翻转列表
+</span><span class="c1"></span>
+</code></pre></div><p>关联表中有冗余数据需要同步更新，@Transactional级联更细需要事务控制</p>
+<p>涉及多张表的时候使用</p>
+<p>P76</p>
+<h2 id="object划分">Object划分</h2>
+<ul>
+<li>PO(persistant object) 对应数据库某表中的一条记录</li>
+<li>VO(value object)值对象</li>
+</ul>
+<h3 id="vo">VO</h3>
+<p>视图对象</p>
+<p>功能</p>
+<ul>
+<li>接收页面传递来的数据，封装成对象</li>
+<li>将业务处理完成的对象封装成页面要用的数据</li>
+</ul>
+<h3 id="dao">DAO</h3>
+<p>data access object</p>
+<p>数据库访问对象</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="n">IPage</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">page</span><span class="o">(</span><span class="n">IPage</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">page</span><span class="o">,</span> <span class="n">Wrapper</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">queryWrapper</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">baseMapper</span><span class="o">.</span><span class="na">selectPage</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">queryWrapper</span><span class="o">);</span>
+    <span class="o">}</span>
+
+</code></pre></div><h2 id="mybatis-plus">Mybatis-Plus</h2>
+<p><strong>需要用@Param标注</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">deleteBatchRelation</span><span class="o">(</span><span class="nd">@Param</span><span class="o">(</span><span class="s">&#34;entities&#34;</span><span class="o">)</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">AttrAttrgroupRelationEntity</span><span class="o">&gt;</span> <span class="n">entities</span><span class="o">);</span>
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">&#34;/attr/relation/delete&#34;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">R</span> <span class="nf">deleteRelation</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">AttrGroupRelationVo</span><span class="o">[]</span> <span class="n">vos</span><span class="o">){</span>
+    <span class="n">attrService</span><span class="o">.</span><span class="na">deleteRelation</span><span class="o">(</span><span class="n">vos</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">R</span><span class="o">.</span><span class="na">ok</span><span class="o">();</span>
+<span class="o">}</span>
+
+</code></pre></div><p>Post请求携带Json数据需要RequestBody才能转换</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="k">if</span><span class="o">(</span><span class="n">attrIds</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span><span class="n">attrIds</span><span class="o">.</span><span class="na">size</span><span class="o">()==</span><span class="n">0</span><span class="o">){</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+</code></pre></div><blockquote>
+<p>每次查询后需要判断非空</p>
+</blockquote>
+<p><strong>不是Json数据的请求参数</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RequestParam</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">params</span>
+
+</code></pre></div><p>前端传来的数据如果是可选项时要注意判断空指针，否则会出现空指针异常</p>
+<p>判断是空指针就不进行接下来的操作.</p>
+<p>87</p>
+<h2 id="保存逻辑">保存逻辑</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpuSaveVo</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">spuName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">spuDescription</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Long</span> <span class="n">catalogId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Long</span> <span class="n">brandId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">weight</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">publishStatus</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">decript</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">images</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Bounds</span> <span class="n">bounds</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">BaseAttrs</span><span class="o">&gt;</span> <span class="n">baseAttrs</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Skus</span><span class="o">&gt;</span> <span class="n">skus</span><span class="o">;</span>
+<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpuInfoEntity</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">1L</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">spuName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">spuDescription</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">catalogId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">brandId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">weight</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Integer</span> <span class="n">publishStatus</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Date</span> <span class="n">createTime</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Date</span> <span class="n">updateTime</span><span class="o">;</span>
+
+<span class="o">}</span>
+
+</code></pre></div><p>还剩下</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">  
+    <span class="kd">private</span> <span class="n">Bounds</span> <span class="n">bounds</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">BaseAttrs</span><span class="o">&gt;</span> <span class="n">baseAttrs</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Skus</span><span class="o">&gt;</span> <span class="n">skus</span><span class="o">;</span>
+
+</code></pre></div><p>字符串拼接操作</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">,</span><span class="n">decript</span><span class="o">)</span>
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SkuInfoEntity</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">1L</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">skuId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">spuId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">skuName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">skuDesc</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">catalogId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">brandId</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">skuDefaultImg</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">skuTitle</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">skuSubtitle</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">price</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">saleCount</span><span class="o">;</span>
+<span class="o">}</span>
+
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Skus</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Attr</span><span class="o">&gt;</span> <span class="n">attr</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">skuName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">price</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">skuTitle</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">skuSubtitle</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Images</span><span class="o">&gt;</span> <span class="n">images</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">descar</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">fullCount</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">discount</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">countStatus</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">fullPrice</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">reducePrice</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">priceStatus</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">MemberPrice</span><span class="o">&gt;</span> <span class="n">memberPrice</span><span class="o">;</span>
+
+
+<span class="o">}</span>
+
+</code></pre></div><h2 id="to">TO</h2>
+<p>A微服务向B微服务发出请求需要用的是传输模型，一般放在公共模块中，命名为TO</p>
+<h2 id="设置微服务内存大小">设置微服务内存大小</h2>
+<blockquote>
+<p>VM Options -Xms100m</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="kt">SET</span><span class="w"> </span><span class="n">SESSION</span><span class="w"> </span><span class="n">TRANSACTION</span><span class="w"> </span><span class="n">ISOLATION</span><span class="w"> </span><span class="n">LEVEL</span><span class="w"> </span><span class="k">READ</span><span class="w"> </span><span class="n">UNCOMMITTED</span><span class="p">;</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><p>防止添加事务后调试不方便</p>
+<p>mybatis默认主键是自增的，所以如果要插入值会产生错误，故要调整</p>
+<h2 id="mysql连接数太多">mysql连接数太多</h2>
+<p><code>java.sql.SQLNonTransientConnectionException: Data source rejected establishment of connection,  mess</code></p>
+<p>解决方法重启mysql</p>
+<p>当前端传来的是0等默认数据时，不进行保存</p>
+<p>要先判断</p>
+<pre><code class="language-ya" data-lang="ya">  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+</code></pre><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//远程查询sku的名字 失败抛出异常不回滚
+</span><span class="c1"></span><span class="k">try</span><span class="o">{</span>
+    <span class="n">R</span> <span class="n">info</span> <span class="o">=</span> <span class="n">productFeignService</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">skuId</span><span class="o">);</span>
+    <span class="n">String</span> <span class="n">skuName</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">info</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;skuInfo&#34;</span><span class="o">);</span>
+    <span class="n">wareSkuEntity</span><span class="o">.</span><span class="na">setSkuName</span><span class="o">(</span><span class="n">skuName</span><span class="o">);</span>
+<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">            <span class="c1">//远程查询sku的名字 失败抛出异常不回滚
+</span><span class="c1"></span>            <span class="k">try</span><span class="o">{</span>
+                <span class="n">R</span> <span class="n">info</span> <span class="o">=</span> <span class="n">productFeignService</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">skuId</span><span class="o">);</span>
+                <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;)</span> <span class="n">info</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;skuInfo&#34;</span><span class="o">);</span>
+                <span class="n">wareSkuEntity</span><span class="o">.</span><span class="na">setSkuName</span><span class="o">((</span><span class="n">String</span><span class="o">)</span> <span class="n">data</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;skuName&#34;</span><span class="o">));</span>
+            <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+
+</code></pre></div><p>注意返回的JSON字符串会默认转换为HashMap 而不是对象</p>
+<h2 id="elasticsearch">ElasticSearch</h2>
+<h3 id="乐观锁操作">乐观锁操作</h3>
+<p><code>_seq_no</code>在每次请求修改后会+1，在高并发的情况下需要加上参数<code>if_seq_no=1</code>，只有当值符合的时候才能修改成功。</p>
+<p>post带_update 对比原来数据，如果没有变化则version序列号都不变</p>
+<p>没有删除type的操作</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">bank/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;match_all&#34;</span><span class="p">:</span> <span class="p">{}</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;sort&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;account_number&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;order&#34;</span><span class="p">:</span> <span class="s2">&#34;asc&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+
+</code></pre></div><p><strong>在正向索引中，文档占据了中心的位置，每个文档指向了一个它所包含的索引项的序列。也就是说文档指向了它包含的那些单词，而反向索引则是单词指向了包含它的文档，很容易看到这个反向的关系。</strong></p>
+<p>&ldquo;shoud&rdquo; 可以不满足，但是满足的得分较高</p>
+<p>filter不会贡献相关性得分</p>
+<p>term 精确字段，非文本字段</p>
+<p>keyword 精确匹配，不会分词</p>
+<p>P 128</p>
+<h3 id="整合springboot">整合Springboot</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertIndex</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">IndexRequest</span> <span class="n">indexRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexRequest</span><span class="o">(</span><span class="s">&#34;users&#34;</span><span class="o">);</span>
+        <span class="n">indexRequest</span><span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">);</span>
+        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+        <span class="n">user</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;Jane&#34;</span><span class="o">);</span>
+        <span class="n">user</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="n">19</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">jsonString</span> <span class="o">=</span> <span class="n">JSON</span><span class="o">.</span><span class="na">toJSONString</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+        <span class="n">indexRequest</span><span class="o">.</span><span class="na">source</span><span class="o">(</span><span class="n">jsonString</span><span class="o">,</span><span class="n">XContentType</span><span class="o">.</span><span class="na">JSON</span><span class="o">);</span><span class="c1">//要保存的内容用source API
+</span><span class="c1"></span>        <span class="n">IndexResponse</span> <span class="n">index</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">index</span><span class="o">(</span><span class="n">indexRequest</span><span class="o">,</span> <span class="n">MallElasticSearchConfig</span><span class="o">.</span><span class="na">COMMON_OPTIONS</span><span class="o">);</span><span class="c1">//发动请求,第二个参数是请求中的选项
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">searchData</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="c1">//创建检索请求
+</span><span class="c1"></span>        <span class="n">SearchRequest</span> <span class="n">searchRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchRequest</span><span class="o">();</span>
+        <span class="n">searchRequest</span><span class="o">.</span><span class="na">indices</span><span class="o">(</span><span class="s">&#34;bank&#34;</span><span class="o">);</span>
+        <span class="n">searchRequest</span><span class="o">.</span><span class="na">types</span><span class="o">(</span><span class="s">&#34;account&#34;</span><span class="o">);</span>
+        <span class="c1">//指定检索条件
+</span><span class="c1"></span>        <span class="n">SearchSourceBuilder</span> <span class="n">searchSourceBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchSourceBuilder</span><span class="o">();</span>
+        <span class="n">searchSourceBuilder</span><span class="o">.</span><span class="na">query</span><span class="o">(</span><span class="n">QueryBuilders</span><span class="o">.</span><span class="na">matchQuery</span><span class="o">(</span><span class="s">&#34;address&#34;</span><span class="o">,</span><span class="s">&#34;mill&#34;</span><span class="o">));</span><span class="c1">//使用工具类创建QueryBuilder
+</span><span class="c1"></span>        <span class="c1">//创建聚合请求
+</span><span class="c1"></span>        <span class="n">TermsAggregationBuilder</span> <span class="n">aggregation</span> <span class="o">=</span> <span class="n">AggregationBuilders</span><span class="o">.</span><span class="na">terms</span><span class="o">(</span><span class="s">&#34;ageAgg&#34;</span><span class="o">).</span><span class="na">field</span><span class="o">(</span><span class="s">&#34;age&#34;</span><span class="o">).</span><span class="na">size</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
+        <span class="n">aggregation</span><span class="o">.</span><span class="na">subAggregation</span><span class="o">(</span><span class="n">AggregationBuilders</span><span class="o">.</span><span class="na">avg</span><span class="o">(</span><span class="s">&#34;accountAvg&#34;</span><span class="o">).</span><span class="na">field</span><span class="o">(</span><span class="s">&#34;account_number&#34;</span><span class="o">));</span>
+        <span class="n">searchSourceBuilder</span><span class="o">.</span><span class="na">aggregation</span><span class="o">(</span><span class="n">aggregation</span><span class="o">);</span>
+        <span class="c1">//发出请求
+</span><span class="c1"></span>        <span class="n">searchRequest</span><span class="o">.</span><span class="na">source</span><span class="o">(</span><span class="n">searchSourceBuilder</span><span class="o">);</span>
+        <span class="n">SearchResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">search</span><span class="o">(</span><span class="n">searchRequest</span><span class="o">,</span> <span class="n">MallElasticSearchConfig</span><span class="o">.</span><span class="na">COMMON_OPTIONS</span><span class="o">);</span>
+
+
+        <span class="c1">//处理结果
+</span><span class="c1"></span>        <span class="n">SearchHits</span> <span class="n">hits</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getHits</span><span class="o">();</span>
+        <span class="n">SearchHit</span><span class="o">[]</span> <span class="n">searchHits</span> <span class="o">=</span> <span class="n">hits</span><span class="o">.</span><span class="na">getHits</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">SearchHit</span> <span class="n">hit</span> <span class="o">:</span> <span class="n">searchHits</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">hit</span><span class="o">.</span><span class="na">getSourceAsString</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">Aggregations</span> <span class="n">aggregations</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getAggregations</span><span class="o">();</span>
+        <span class="n">Terms</span> <span class="n">ageAgg</span> <span class="o">=</span> <span class="n">aggregations</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;ageAgg&#34;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Terms</span><span class="o">.</span><span class="na">Bucket</span> <span class="n">bucket</span> <span class="o">:</span> <span class="n">ageAgg</span><span class="o">.</span><span class="na">getBuckets</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">keyAsString</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="na">getKeyAsString</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;年龄&#34;</span><span class="o">+</span><span class="n">keyAsString</span><span class="o">+</span><span class="s">&#34;-&gt;&#34;</span><span class="o">+</span><span class="n">bucket</span><span class="o">.</span><span class="na">getDocCount</span><span class="o">()+</span><span class="s">&#34;个人&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+</code></pre></div><p>nested嵌入式属性，否则因为扁平化处理会出现错误</p>
+<h2 id="mybatis">Mybatis</h2>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&#34;selectSearchAttrs&#34;</span> <span class="na">resultType=</span><span class="s">&#34;java.lang.Long&#34;</span><span class="nt">&gt;</span>
+        SELECT attr_id FROM pms_attr WHERE attr_id IN  
+        <span class="nt">&lt;foreach</span> <span class="na">collection=</span><span class="s">&#34;attrIds&#34;</span> <span class="na">separator=</span><span class="s">&#34;,&#34;</span> <span class="na">open=</span><span class="s">&#34;(&#34;</span> <span class="na">close=</span><span class="s">&#34;)&#34;</span><span class="nt">&gt;</span>
+            #{id}
+        <span class="nt">&lt;/foreach&gt;</span>
+        AND search_type = 1
+    <span class="nt">&lt;/select&gt;</span>
+
+</code></pre></div><h2 id="业务代码">业务代码</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Set</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">searchSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">searchAttrIds</span><span class="o">);</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">ESSkuModel</span><span class="o">.</span><span class="na">Attr</span><span class="o">&gt;</span> <span class="n">attrList</span> <span class="o">=</span> <span class="n">productAttrValueEntities</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="c1">//从attrIds中过滤出所有符合searchAttrIds的值
+</span><span class="c1"></span>            <span class="k">return</span> <span class="n">searchSet</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">getAttrId</span><span class="o">());</span>
+        <span class="o">})</span>
+
+</code></pre></div><p>泛型设计</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">R</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">1L</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">data</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div><p>Hash表加速判断</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">,</span> <span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">collect</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="n">item</span><span class="o">.</span><span class="na">getSkuId</span><span class="o">(),</span> <span class="n">item</span> <span class="o">-&gt;</span> <span class="n">item</span><span class="o">.</span><span class="na">isHasStock</span><span class="o">()));</span>
+
+
+</code></pre></div><p>远程调用需要try catch</p>
+<p>否则一旦出现异常，后面代码全部不能执行</p>
+<p><strong>疑问</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">SkuHasStockVo</span><span class="o">&gt;&gt;</span> <span class="n">typeReference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">SkuHasStockVo</span><span class="o">&gt;&gt;(){};</span>
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">      <span class="n">access</span><span class="o">-</span><span class="n">key</span><span class="o">:</span> <span class="n">LTAI4GH6YUaRR7mC3xAv141W</span>
+      <span class="n">secret</span><span class="o">-</span><span class="n">key</span><span class="o">:</span> <span class="n">P0M4V6CgXQ2fCrbPpR4aAzNQV8nTBo</span>
+
+</code></pre></div><h2 id="nginx">Nginx</h2>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">firewall-cmd --list-all <span class="c1">#查看防火墙的开放端口</span>
+firewall-cmd --add-port<span class="o">=</span>80/tcp --permanent <span class="c1">#设置开放端口</span>
+firewall-cmd --reload <span class="c1">#重启防火墙</span>
+
+</code></pre></div><h3 id="nginxconf">nginx.conf</h3>
+<pre><code class="language-conf" data-lang="conf">http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    #配置上游服务器
+    upstream gulimall{
+        server 192.168.189.1:88;
+    }
+    server {
+        listen       80;
+        server_name  gulimall.com;
+        location / {
+                proxy_set_header HOST $host;  #请求头中host信息会随着nginx代理丢失，所以需要配置
+                proxy_pass http://gulimall;  #代理给上游服务器
+        }
+}
+
+</code></pre><h3 id="网关配置">网关配置</h3>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="w">        </span>- <span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">gulimall_host_route</span><span class="w">
+</span><span class="w">          </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l">lb://gulimall-product</span><span class="w">
+</span><span class="w">          </span><span class="nt">predicates</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="l">Host=**.gulimall.com</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><h2 id="调优参数">调优参数</h2>
+<pre><code>java **-Xmx3550m -Xms3550m -Xmn2g** **-Xss128k**
+**-**Xmx3550m**：设置JVM最大可用内存为3550M。
+
+**-Xms3550m**：设置JVM促使内存为3550m。此值可以设置与-Xmx相同，以避免每次垃圾回收完成后JVM重新分配内存。
+
+**-Xmn2g**：设置年轻代大小为2G。**整个JVM内存大小=年轻代大小 + 年老代大小 + 持久代大小**。持久代一般固定大小为64m，所以增大年轻代后，将会减小年老代大小。此值对系统性能影响较大，Sun官方推荐配置为整个堆的3/8。
+
+**-Xss128k**：设置每个线程的堆栈大小。JDK5.0以后每个线程堆栈大小为1M，以前每个线程堆栈大小为256K。更具应用的线程所需内存大小进行调整。在相同物理内存下，减小这个值能生成更多的线程。但是操作系统对一个进程内的线程数还是有限制的，不能无限生成，经验值在3000~5000左右。 
+
+</code></pre><p>中间件越多，性能损失越大，损失在网络交互；</p>
+<h2 id="docker">Docker</h2>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">yum install -y yum-utils
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum install docker-ce
+
+</code></pre></div><h3 id="设置开机自启">设置开机自启</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">systemctl <span class="nb">enable</span> docker
+
+</code></pre></div><h3 id="常用命令">常用命令</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># docker exec -it redis /bin/bash #进入docker容器内部，类似一个Linux</span>
+root@af2f99f3848f:/data# ls
+<span class="o">[</span>root@localhost src<span class="o">]</span><span class="c1"># docker exec -it redis redis-cli</span>
+127.0.0.1:6379&gt; 
+
+</code></pre></div><h2 id="动静分离">动静分离</h2>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">/usr/local/nginx/html
+
+</code></pre></div><h2 id="代码优化">代码优化</h2>
+<p>在循环中查询数据库因为每次都要连接数据库会导致开销过大</p>
+<p>优化方法</p>
+<ul>
+<li>调整为先将要查的数据封装成集合，然后一次连接数据库查询出所有信息</li>
+<li>先查出所有数据然后用代码进行筛选，总共查询一次数据库</li>
+</ul>
+<p>修改前</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm">     * 查出所有分类并封装成3级分类
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;&gt;</span> <span class="nf">getCatalogJson</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">//查出所有一级分类
+</span><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">level1Categories</span> <span class="o">=</span> <span class="n">getLevel1Categories</span><span class="o">();</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">level1Categories</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="n">k</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="c1">//查所有二级分类
+</span><span class="c1"></span>            <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">categoryEntities</span> <span class="o">=</span> <span class="n">baseMapper</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="k">new</span> <span class="n">QueryWrapper</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;().</span><span class="na">eq</span><span class="o">(</span><span class="s">&#34;parent_cid&#34;</span><span class="o">,</span> <span class="n">v</span><span class="o">.</span><span class="na">getCatId</span><span class="o">()));</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;</span> <span class="n">calalog2Vos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">categoryEntities</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">calalog2Vos</span> <span class="o">=</span> <span class="n">categoryEntities</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="n">Catalog2Vo</span> <span class="n">catalog2Vo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Catalog2Vo</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="kc">null</span><span class="o">,</span> <span class="n">item</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">item</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+                    <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">level3Catalogs</span> <span class="o">=</span> <span class="n">baseMapper</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="k">new</span> <span class="n">QueryWrapper</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;().</span><span class="na">eq</span><span class="o">(</span><span class="s">&#34;parent_cid&#34;</span><span class="o">,</span> <span class="n">item</span><span class="o">.</span><span class="na">getCatId</span><span class="o">()));</span>
+                    <span class="k">if</span><span class="o">(</span><span class="n">level3Catalogs</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+                        <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">.</span><span class="na">Catalog3Vo</span><span class="o">&gt;</span> <span class="n">catalog3VoList</span> <span class="o">=</span> <span class="n">level3Catalogs</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">level3Catalog</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                            <span class="n">Catalog2Vo</span><span class="o">.</span><span class="na">Catalog3Vo</span> <span class="n">catalog3Vo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Catalog2Vo</span><span class="o">.</span><span class="na">Catalog3Vo</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">level3Catalog</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">level3Catalog</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+                            <span class="k">return</span> <span class="n">catalog3Vo</span><span class="o">;</span>
+                        <span class="o">}).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+                        <span class="n">catalog2Vo</span><span class="o">.</span><span class="na">setCatalog3List</span><span class="o">(</span><span class="n">catalog3VoList</span><span class="o">);</span>
+                    <span class="o">}</span>
+                    <span class="k">return</span> <span class="n">catalog2Vo</span><span class="o">;</span>
+                <span class="o">}).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">calalog2Vos</span><span class="o">;</span>
+        <span class="o">}));</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+
+
+    <span class="o">}</span>
+
+</code></pre></div><p>优化后</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm">     * 查出所有分类并封装成3级分类
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;&gt;</span> <span class="nf">getCatalogJson</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">//查出所有数据，用空间换时间
+</span><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">selectList</span> <span class="o">=</span> <span class="n">baseMapper</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="c1">//查出所有一级分类
+</span><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">level1Categories</span> <span class="o">=</span> <span class="n">getChildren</span><span class="o">(</span><span class="n">selectList</span><span class="o">,</span><span class="n">0L</span><span class="o">);</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">level1Categories</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="n">k</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="c1">//查所有二级分类
+</span><span class="c1"></span>            <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">categoryEntities</span> <span class="o">=</span> <span class="n">getChildren</span><span class="o">(</span><span class="n">selectList</span><span class="o">,</span><span class="n">v</span><span class="o">.</span><span class="na">getCatId</span><span class="o">());</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;</span> <span class="n">calalog2Vos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">categoryEntities</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">calalog2Vos</span> <span class="o">=</span> <span class="n">categoryEntities</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="n">Catalog2Vo</span> <span class="n">catalog2Vo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Catalog2Vo</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="kc">null</span><span class="o">,</span> <span class="n">item</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">item</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+                    <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">level3Catalogs</span> <span class="o">=</span> <span class="n">getChildren</span><span class="o">(</span><span class="n">selectList</span><span class="o">,</span><span class="n">item</span><span class="o">.</span><span class="na">getCatId</span><span class="o">());</span>
+                    <span class="k">if</span><span class="o">(</span><span class="n">level3Catalogs</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+                        <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">.</span><span class="na">Catalog3Vo</span><span class="o">&gt;</span> <span class="n">catalog3VoList</span> <span class="o">=</span> <span class="n">level3Catalogs</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">level3Catalog</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                            <span class="n">Catalog2Vo</span><span class="o">.</span><span class="na">Catalog3Vo</span> <span class="n">catalog3Vo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Catalog2Vo</span><span class="o">.</span><span class="na">Catalog3Vo</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">level3Catalog</span><span class="o">.</span><span class="na">getCatId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span> <span class="n">level3Catalog</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+                            <span class="k">return</span> <span class="n">catalog3Vo</span><span class="o">;</span>
+                        <span class="o">}).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+                        <span class="n">catalog2Vo</span><span class="o">.</span><span class="na">setCatalog3List</span><span class="o">(</span><span class="n">catalog3VoList</span><span class="o">);</span>
+                    <span class="o">}</span>
+                    <span class="k">return</span> <span class="n">catalog2Vo</span><span class="o">;</span>
+                <span class="o">}).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">calalog2Vos</span><span class="o">;</span>
+        <span class="o">}));</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+
+
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 从categoryEntityList选出parentId符合的封装成List并返回
+</span><span class="cm">     * @param categoryEntityList
+</span><span class="cm">     * @param parentId
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="nf">getChildren</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">categoryEntityList</span><span class="o">,</span><span class="n">Long</span> <span class="n">parentId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">CategoryEntity</span><span class="o">&gt;</span> <span class="n">children</span> <span class="o">=</span> <span class="n">categoryEntityList</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">categoryEntity</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">categoryEntity</span><span class="o">.</span><span class="na">getParentCid</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">parentId</span><span class="o">);</span>
+        <span class="o">}).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">children</span><span class="o">;</span>
+    <span class="o">}</span>
+
+
+</code></pre></div><p>堆外内存溢出</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm">     * 1. SpringBoot2.0之后默认使用 lettuce 作为操作 redis 的客户端，lettuce 使用 Netty 进行网络通信
+</span><span class="cm">     * 2. lettuce 的 bug 导致 Netty 堆外内存溢出 -Xmx300m   Netty 如果没有指定对外内存 默认使用 JVM 设置的参数
+</span><span class="cm">     *      可以通过 -Dio.netty.maxDirectMemory 设置堆外内存
+</span><span class="cm">     * 解决方案：不能仅仅使用 -Dio.netty.maxDirectMemory 去调大堆外内存
+</span><span class="cm">     *      1. 升级 lettuce 客户端   2. 切换使用 jedis
+</span><span class="cm">     *
+</span><span class="cm">     *      RedisTemplate 对 lettuce 与 jedis 均进行了封装 所以直接使用 详情见：RedisAutoConfiguration 类
+</span><span class="cm">     */</span>
+
+</code></pre></div><h2 id="锁">锁</h2>
+<p>确认缓存有没有，查询数据库，将结果放入缓存作为原子性操作</p>
+<p>之前加锁，之后释放锁</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="o">[</span><span class="n">root</span><span class="nd">@localhost</span> <span class="n">html</span><span class="o">]</span><span class="err">#</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">redis</span> <span class="n">redis</span><span class="o">-</span><span class="n">cli</span>
+<span class="n">127</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">1</span><span class="o">:</span><span class="n">6379</span><span class="o">&gt;</span> <span class="n">set</span> <span class="n">lock</span> <span class="n">hello</span> <span class="n">NX</span>
+<span class="n">OK</span>
+
+</code></pre></div><p>只有当不存在时候才能set，这是原子性操作(NX)</p>
+<h3 id="原子性">原子性</h3>
+<p>一系列命令全成功或者全失败</p>
+<h3 id="分布式锁">分布式锁</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="cm">/**
+</span><span class="cm">     * Redis使用分布式锁
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;&gt;</span> <span class="nf">getCatalogJsonFromDBWithRedisLock</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+
+        <span class="c1">//上锁
+</span><span class="c1"></span>        <span class="n">String</span> <span class="n">uuid</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span><span class="c1">//为保证在分布式系统中确认是自己的锁
+</span><span class="c1"></span>        <span class="n">Boolean</span> <span class="n">lock</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">().</span><span class="na">setIfAbsent</span><span class="o">(</span><span class="s">&#34;lock&#34;</span><span class="o">,</span> <span class="n">uuid</span><span class="o">,</span> <span class="n">300</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span><span class="c1">//原子性操作，只有一个线程能执行
+</span><span class="c1"></span>        <span class="k">if</span><span class="o">(</span><span class="n">lock</span><span class="o">){</span>
+            <span class="c1">//得到锁并加锁成功
+</span><span class="c1"></span>            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Catalog2Vo</span><span class="o">&gt;&gt;</span> <span class="n">catalogJsonFromDB</span><span class="o">;</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="c1">//执行操作
+</span><span class="c1"></span>                <span class="n">catalogJsonFromDB</span> <span class="o">=</span> <span class="n">getCatalogJsonFromDB</span><span class="o">();</span>
+            <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+                <span class="c1">//无论是否发生异常都要解锁
+</span><span class="c1"></span>                <span class="c1">//lua脚本原子性操作
+</span><span class="c1"></span>                <span class="n">String</span> <span class="n">script</span> <span class="o">=</span> <span class="s">&#34;if redis.call(&#39;get&#39;, KEYS[1]) == ARGV[1] then return redis.call(&#39;del&#39;, KEYS[1]) else return 0 end&#34;</span><span class="o">;</span>
+                <span class="n">redisTemplate</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">DefaultRedisScript</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;(</span><span class="n">script</span><span class="o">,</span> <span class="n">Long</span><span class="o">.</span><span class="na">class</span><span class="o">),</span> <span class="n">Collections</span><span class="o">.</span><span class="na">singletonList</span><span class="o">(</span><span class="s">&#34;lock&#34;</span><span class="o">),</span> <span class="n">uuid</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">catalogJsonFromDB</span><span class="o">;</span>
+
+        <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+            <span class="c1">//自旋等待锁
+</span><span class="c1"></span>            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">100</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">getCatalogJsonFromDBWithRedisLock</span><span class="o">();</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+
+</code></pre></div><h3 id="读写锁">读写锁</h3>
+<p>只要有写操作，无论是先写还是后写都会阻塞</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="cm">/**
+</span><span class="cm">     * 读写锁测试
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/write&#34;</span><span class="o">)</span>
+    <span class="nd">@ResponseBody</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">write</span><span class="o">(){</span>
+        <span class="n">RReadWriteLock</span> <span class="n">readWriteLock</span> <span class="o">=</span> <span class="n">redissonClient</span><span class="o">.</span><span class="na">getReadWriteLock</span><span class="o">(</span><span class="s">&#34;rw-lock&#34;</span><span class="o">);</span>
+        <span class="c1">//获取写锁
+</span><span class="c1"></span>        <span class="n">RLock</span> <span class="n">rLock</span> <span class="o">=</span> <span class="n">readWriteLock</span><span class="o">.</span><span class="na">writeLock</span><span class="o">();</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//上锁
+</span><span class="c1"></span>            <span class="n">rLock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">3000</span><span class="o">);</span>
+            <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">().</span><span class="na">set</span><span class="o">(</span><span class="s">&#34;write-value&#34;</span><span class="o">,</span><span class="n">s</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">rLock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/read&#34;</span><span class="o">)</span>
+    <span class="nd">@ResponseBody</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">read</span><span class="o">(){</span>
+        <span class="n">RReadWriteLock</span> <span class="n">readWriteLock</span> <span class="o">=</span> <span class="n">redissonClient</span><span class="o">.</span><span class="na">getReadWriteLock</span><span class="o">(</span><span class="s">&#34;rw-lock&#34;</span><span class="o">);</span>
+        <span class="c1">//获取写锁
+</span><span class="c1"></span>        <span class="n">RLock</span> <span class="n">rLock</span> <span class="o">=</span> <span class="n">readWriteLock</span><span class="o">.</span><span class="na">readLock</span><span class="o">();</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//上锁
+</span><span class="c1"></span>            <span class="n">rLock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;write-value&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">rLock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
+    <span class="o">}</span>
+
+</code></pre></div><p>信号量可以用作系统的限流功能</p>
+<p>锁的粒度越细越好</p>
+<p>更新数据库后删除相应的缓存</p>
+<h2 id="自动配置过程">自动配置过程</h2>
+<p>1、选择导入哪种类型的配置</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">CacheConfigurationImportSelector</span> <span class="kd">implements</span> <span class="n">ImportSelector</span> <span class="o">{</span>
+        <span class="n">CacheConfigurationImportSelector</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">selectImports</span><span class="o">(</span><span class="n">AnnotationMetadata</span> <span class="n">importingClassMetadata</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">CacheType</span><span class="o">[]</span> <span class="n">types</span> <span class="o">=</span> <span class="n">CacheType</span><span class="o">.</span><span class="na">values</span><span class="o">();</span>
+            <span class="n">String</span><span class="o">[]</span> <span class="n">imports</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">types</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">types</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">imports</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">CacheConfigurations</span><span class="o">.</span><span class="na">getConfigurationClass</span><span class="o">(</span><span class="n">types</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="o">}</span>
+
+            <span class="k">return</span> <span class="n">imports</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="kd">class</span> <span class="nc">CacheConfigurations</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">CacheType</span><span class="o">,</span> <span class="n">Class</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">MAPPINGS</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nf">CacheConfigurations</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getConfigurationClass</span><span class="o">(</span><span class="n">CacheType</span> <span class="n">cacheType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">configurationClass</span> <span class="o">=</span> <span class="o">(</span><span class="n">Class</span><span class="o">)</span><span class="n">MAPPINGS</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cacheType</span><span class="o">);</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="na">state</span><span class="o">(</span><span class="n">configurationClass</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">,</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&#34;Unknown cache type &#34;</span> <span class="o">+</span> <span class="n">cacheType</span><span class="o">;</span>
+        <span class="o">});</span>
+        <span class="k">return</span> <span class="n">configurationClass</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CacheType</span> <span class="nf">getType</span><span class="o">(</span><span class="n">String</span> <span class="n">configurationClassName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Iterator</span> <span class="n">var1</span> <span class="o">=</span> <span class="n">MAPPINGS</span><span class="o">.</span><span class="na">entrySet</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span>
+
+        <span class="n">Entry</span> <span class="n">entry</span><span class="o">;</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">var1</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&#34;Unknown configuration class &#34;</span> <span class="o">+</span> <span class="n">configurationClassName</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="n">entry</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">)</span><span class="n">var1</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">while</span><span class="o">(!((</span><span class="n">Class</span><span class="o">)</span><span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">()).</span><span class="na">getName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">configurationClassName</span><span class="o">));</span>
+
+        <span class="k">return</span> <span class="o">(</span><span class="n">CacheType</span><span class="o">)</span><span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">CacheType</span><span class="o">,</span> <span class="n">Class</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">mappings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EnumMap</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">GENERIC</span><span class="o">,</span> <span class="n">GenericCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">EHCACHE</span><span class="o">,</span> <span class="n">EhCacheCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">HAZELCAST</span><span class="o">,</span> <span class="n">HazelcastCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">INFINISPAN</span><span class="o">,</span> <span class="n">InfinispanCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">JCACHE</span><span class="o">,</span> <span class="n">JCacheCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">COUCHBASE</span><span class="o">,</span> <span class="n">CouchbaseCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">REDIS</span><span class="o">,</span> <span class="n">RedisCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">CAFFEINE</span><span class="o">,</span> <span class="n">CaffeineCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">SIMPLE</span><span class="o">,</span> <span class="n">SimpleCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">mappings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CacheType</span><span class="o">.</span><span class="na">NONE</span><span class="o">,</span> <span class="n">NoOpCacheConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">MAPPINGS</span> <span class="o">=</span> <span class="n">Collections</span><span class="o">.</span><span class="na">unmodifiableMap</span><span class="o">(</span><span class="n">mappings</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+</code></pre></div><p>从容器中找RedisCacheConfiguration，如果没有就使用默认配置</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Configuration</span>
+<span class="nd">@ConditionalOnClass</span><span class="o">({</span><span class="n">RedisConnectionFactory</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="nd">@AutoConfigureAfter</span><span class="o">({</span><span class="n">RedisAutoConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="nd">@ConditionalOnBean</span><span class="o">({</span><span class="n">RedisConnectionFactory</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="nd">@ConditionalOnMissingBean</span><span class="o">({</span><span class="n">CacheManager</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="nd">@Conditional</span><span class="o">({</span><span class="n">CacheCondition</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="kd">class</span> <span class="nc">RedisCacheConfiguration</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">CacheProperties</span> <span class="n">cacheProperties</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">CacheManagerCustomizers</span> <span class="n">customizerInvoker</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">redis</span><span class="o">.</span><span class="na">cache</span><span class="o">.</span><span class="na">RedisCacheConfiguration</span> <span class="n">redisCacheConfiguration</span><span class="o">;</span>
+
+    <span class="n">RedisCacheConfiguration</span><span class="o">(</span><span class="n">CacheProperties</span> <span class="n">cacheProperties</span><span class="o">,</span> <span class="n">CacheManagerCustomizers</span> <span class="n">customizerInvoker</span><span class="o">,</span> <span class="n">ObjectProvider</span><span class="o">&lt;</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">redis</span><span class="o">.</span><span class="na">cache</span><span class="o">.</span><span class="na">RedisCacheConfiguration</span><span class="o">&gt;</span> <span class="n">redisCacheConfiguration</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">cacheProperties</span> <span class="o">=</span> <span class="n">cacheProperties</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">customizerInvoker</span> <span class="o">=</span> <span class="n">customizerInvoker</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">redisCacheConfiguration</span> <span class="o">=</span> <span class="o">(</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">redis</span><span class="o">.</span><span class="na">cache</span><span class="o">.</span><span class="na">RedisCacheConfiguration</span><span class="o">)</span><span class="n">redisCacheConfiguration</span><span class="o">.</span><span class="na">getIfAvailable</span><span class="o">();</span>
+    <span class="o">}</span>
+	
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">RedisCacheManager</span> <span class="nf">cacheManager</span><span class="o">(</span><span class="n">RedisConnectionFactory</span> <span class="n">redisConnectionFactory</span><span class="o">,</span> <span class="n">ResourceLoader</span> <span class="n">resourceLoader</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">RedisCacheManagerBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">RedisCacheManager</span><span class="o">.</span><span class="na">builder</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">).</span><span class="na">cacheDefaults</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">determineConfiguration</span><span class="o">(</span><span class="n">resourceLoader</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">()));</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">cacheNames</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">cacheProperties</span><span class="o">.</span><span class="na">getCacheNames</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">cacheNames</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">initialCacheNames</span><span class="o">(</span><span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">(</span><span class="n">cacheNames</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="o">(</span><span class="n">RedisCacheManager</span><span class="o">)</span><span class="k">this</span><span class="o">.</span><span class="na">customizerInvoker</span><span class="o">.</span><span class="na">customize</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="na">build</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">redis</span><span class="o">.</span><span class="na">cache</span><span class="o">.</span><span class="na">RedisCacheConfiguration</span> <span class="nf">determineConfiguration</span><span class="o">(</span><span class="n">ClassLoader</span> <span class="n">classLoader</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">redisCacheConfiguration</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">redisCacheConfiguration</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">Redis</span> <span class="n">redisProperties</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">cacheProperties</span><span class="o">.</span><span class="na">getRedis</span><span class="o">();</span>
+            <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">redis</span><span class="o">.</span><span class="na">cache</span><span class="o">.</span><span class="na">RedisCacheConfiguration</span> <span class="n">config</span> <span class="o">=</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">data</span><span class="o">.</span><span class="na">redis</span><span class="o">.</span><span class="na">cache</span><span class="o">.</span><span class="na">RedisCacheConfiguration</span><span class="o">.</span><span class="na">defaultCacheConfig</span><span class="o">();</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">serializeValuesWith</span><span class="o">(</span><span class="n">SerializationPair</span><span class="o">.</span><span class="na">fromSerializer</span><span class="o">(</span><span class="k">new</span> <span class="n">JdkSerializationRedisSerializer</span><span class="o">(</span><span class="n">classLoader</span><span class="o">)));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">redisProperties</span><span class="o">.</span><span class="na">getTimeToLive</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">entryTtl</span><span class="o">(</span><span class="n">redisProperties</span><span class="o">.</span><span class="na">getTimeToLive</span><span class="o">());</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">redisProperties</span><span class="o">.</span><span class="na">getKeyPrefix</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">prefixKeysWith</span><span class="o">(</span><span class="n">redisProperties</span><span class="o">.</span><span class="na">getKeyPrefix</span><span class="o">());</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">redisProperties</span><span class="o">.</span><span class="na">isCacheNullValues</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">disableCachingNullValues</span><span class="o">();</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">redisProperties</span><span class="o">.</span><span class="na">isUseKeyPrefix</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">disableKeyPrefix</span><span class="o">();</span>
+            <span class="o">}</span>
+
+            <span class="k">return</span> <span class="n">config</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+</code></pre></div><p>JavaBean中的属性与配置文件中的值进行绑定</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@ConfigurationProperties</span><span class="o">(</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s">&#34;spring.cache&#34;</span>
+<span class="o">)</span>
+
+
+</code></pre></div><p>防止缓存穿透</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="l">spring.cache.redis.cache-null-values=true</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><h2 id="springcache">SpringCache</h2>
+<h3 id="常用注解">常用注解</h3>
+<ul>
+<li><code>@Cacheable</code>: Triggers cache population.</li>
+<li><code>@CacheEvict</code>: Triggers cache eviction. 失效模式下 更新的方法上使用</li>
+<li><code>@CachePut</code>: Updates the cache without interfering with the method execution.</li>
+<li><code>@Caching</code>: Regroups multiple cache operations to be applied on a method. 组合多个注解</li>
+<li><code>@CacheConfig</code>: Shares some common cache-related settings at class-level.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@CacheEvict</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;category&#34;</span><span class="o">,</span><span class="n">key</span> <span class="o">=</span> <span class="s">&#34;&#39;getLevel1Categories&#39;&#34;</span><span class="o">)</span>
+
+</code></pre></div><p>key如果使用的是el表达式需要加上''</p>
+<pre><code>access-key: LTAI4GH6YUaRR7mC3xAv141W
+secret-key: P0M4V6CgXQ2fCrbPpR4aAzNQV8nTBo
+
+</code></pre><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//将ThreadPoolConfigProperties加入容器中
+</span><span class="c1"></span><span class="nd">@EnableConfigurationProperties</span><span class="o">(</span><span class="n">ThreadPoolConfigProperties</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@Component</span>
+<span class="c1">//两个注解的作用相同，只能标注其中的一个，否则容器中存在2个相同的bean会报错
+</span><span class="c1"></span>
+
+</code></pre></div><h2 id="转发常见问题">转发常见问题</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&#34;skuId&#34;</span><span class="o">,</span><span class="n">skuId</span><span class="o">);</span> <span class="c1">//在session中存储数据，且只能取一次，在页面取出
+</span><span class="c1"></span><span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&#34;skuId&#34;</span><span class="o">,</span><span class="n">skuId</span><span class="o">);</span><span class="c1">//数据会拼在url地址中作为参数
+</span><span class="c1"></span>
+</code></pre></div><h3 id="示例-1">示例</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/addToCart&#34;</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">addToCart</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="s">&#34;skuId&#34;</span><span class="o">)</span><span class="n">Long</span> <span class="n">skuId</span><span class="o">,</span>
+                            <span class="nd">@RequestParam</span><span class="o">(</span><span class="s">&#34;num&#34;</span><span class="o">)</span> <span class="n">Integer</span> <span class="n">num</span><span class="o">,</span>
+                            <span class="n">RedirectAttributes</span> <span class="n">redirectAttributes</span><span class="o">){</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">CartItem</span> <span class="n">item</span> <span class="o">=</span> <span class="n">cartService</span><span class="o">.</span><span class="na">addToCart</span><span class="o">(</span><span class="n">skuId</span><span class="o">,</span><span class="n">num</span><span class="o">);</span>
+            <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">&#34;skuId&#34;</span><span class="o">,</span><span class="n">skuId</span><span class="o">);</span>
+            <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&#34;skuId&#34;</span><span class="o">,</span><span class="n">skuId</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="s">&#34;redirect:http://cart.gulimall.com/addToCartSuccess.html&#34;</span><span class="o">;</span>
+    <span class="o">}</span>
+
+</code></pre></div><p>添加购物车和显示购物车需要经过重定向，否则用户刷新页面就会增加商品</p>
+<h2 id="rabbitmq">RabbitMq</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="cm">/**
+</span><span class="cm">     * 源码中使用ObjectProvider查询容器中是否有MessageConverter如果有就用容器中的
+</span><span class="cm">     * 没有就用默认的
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">MessageConverter</span> <span class="nf">messageConverter</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Jackson2JsonMessageConverter</span><span class="o">();</span>
+    <span class="o">}</span>
+
+</code></pre></div><p>配置</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="w">  </span><span class="nt">rabbitmq</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.91.128</span><span class="w">
+</span><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">5672</span><span class="w">
+</span><span class="w">    </span><span class="nt">virtual-host</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">    </span><span class="nt">publisher-confirms</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">  </span><span class="c">#发送端确认，到达broker</span><span class="w">
+</span><span class="w">    </span><span class="nt">publisher-returns</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c">#抵达队列确认</span><span class="w">
+</span><span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">mandatory</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">    </span><span class="nt">listener</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">direct</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">acknowledge-mode</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w"> </span><span class="c">#手动ACK,防宕机</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><h2 id="windows查看端口占用情况">Windows查看端口占用情况</h2>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd">netstat -ano<span class="p">|</span>findstr 9000
+tasklist<span class="p">|</span>findstr 19796
+taskkill -pid (进程pid) -f
+
+</code></pre></div><h1 id="面试做此项目遇到的问题和解决方法">面试：做此项目遇到的问题和解决方法</h1>
+<h2 id="feign">Feign</h2>
+<p>注意远程调用接口时候需要<code>@ResponseBody</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/currentUserCartItem&#34;</span><span class="o">)</span>
+    <span class="nd">@ResponseBody</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CartItem</span><span class="o">&gt;</span> <span class="nf">getCurrentUserCartItem</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">cartService</span><span class="o">.</span><span class="na">getCurrentUserCartItem</span><span class="o">();</span>
+    <span class="o">}</span>
+
+</code></pre></div><p>通过分析Feign的源码可知，Feign会根据程序编写的拦截器构造一个Request请求</p>
+<p>如果没有配置拦截器就用默认的，此时的Http Request 没有header 和 Body</p>
+<p>所以会丢失请求头</p>
+<p>:P268</p>
+<h2 id="springboot注意事项">Springboot注意事项</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@ResponseBody</span>
+<span class="nd">@GetMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/payOrder&#34;</span> <span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="s">&#34;text/html&#34;</span><span class="o">)</span>
+
+</code></pre></div><p>注释表明返回的ResponseBody的格式是html</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/order/order/listWithItem&#34;</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">R</span> <span class="nf">listWithItem</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">params</span><span class="o">);</span>
+
+</code></pre></div><p>远程调用建议用Json方式传递参数</p>
+<p>每次远程调用都使用<code>@PostMapping</code>和<code>@RequestBody</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="w">    </span><span class="nt">listener</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">direct</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">acknowledge-mode</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w"> </span><span class="c">#手动ACK,防宕机</span><span class="w">
+</span><span class="w">      </span><span class="nt">simple</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">acknowledge-mode</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w">
+</span><span class="w">
+</span></code></pre></div><p>必须配置手动签收，否则手动ack后会ERROR</p>
+<h2 id="vmware问题">VMWARE问题</h2>
+<p>eth33网卡的IP地址默认是动态分配的所以需要手动设置成静态</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/gulimall/">Gulimall</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Jack Wu
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

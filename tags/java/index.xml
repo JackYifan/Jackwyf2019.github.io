@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Jack Wu</title>
-    <link>https://Jackwyf2019.github.io/post/</link>
-    <description>Recent content in Posts on Jack Wu</description>
+    <title>Java on Jack Wu</title>
+    <link>https://Jackwyf2019.github.io/tags/java/</link>
+    <description>Recent content in Java on Jack Wu</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://Jackwyf2019.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>C语言复习笔记</title>
-      <link>https://Jackwyf2019.github.io/p/c%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://Jackwyf2019.github.io/p/c%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-      <description>字符串 char *p=&amp;#34;Hello World&amp;#34;; //&amp;#34;Hello World&amp;#34;字符串存储在常量存储区中,属于只读存储区,不能进行写操作 *p=&amp;#39;w&amp;#39;;//错误写法 char str[]=&amp;#34;Hello World&amp;#34;; //若在函数内定义就分配到栈中，属于局部变量 //若在全局分配或用static关键词修饰则存储在静态存储区 str=&amp;#34;Hello&amp;#34;;//错误,数组是常量指针，不能修改其地址内容 即不能作为左值但是其内容是可以修改的 str[0]=&amp;#39;w&amp;#39;;//正确 p=str; p=&amp;amp;str[0];//二者等价 scanf() 遇 到空白字符空格 Tab 回车 就代表输入结束
-gets()遇到回车结束。过程：把回车从缓存区中读走但是不作为字符串的一部分
-&amp;quot;%*c&amp;quot; 读入一个字符，但忽略它（即不赋值给任何变量）。
-作用域和生存期 static int a = 1 在gcc test.c时赋初值为1且只初始化一次。若是全局静态变量仅能在test.c中使用（多文件时候静态全局变量可以重名），若是静态局部变量只能在{}中间使用，但再次调用时候因为地址没有变化所以值没有变化。
-不是静态的全局变量在其他文件中也能使用。
-初始化问题 静态变量和全局变量因为在静态存储区，所以在没有初始化时赋初值为0
-auto局部变量在没有赋值时，赋的是随机值</description>
-    </item>
-    
+    <language>en-us</language><atom:link href="https://Jackwyf2019.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gulimall笔记</title>
       <link>https://Jackwyf2019.github.io/p/gulimall%E7%AC%94%E8%AE%B0/</link>

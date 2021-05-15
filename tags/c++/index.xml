@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on Jack Wu</title>
+    <link>https://Jackwyf2019.github.io/tags/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on Jack Wu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://Jackwyf2019.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>面向对象程序设计</title>
+      <link>https://Jackwyf2019.github.io/p/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/p/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</guid>
+      <description>字符串 public void test2(){ //array是一个引用 5行是5个指向数组的引用 类似于C语言中的int ** (也有一些区别)  //所以5行的排列顺序不一定是连续的 也可以不一样长  int[][]array=new int[5][]; array[0]=new int[3]; array[1]=new int[4]; } scanf(&amp;#34;%d%d&amp;#34;,&amp;amp;m,&amp;amp;N); input:5 6 //scanf是从缓冲区中读取数据的，所以此时缓冲区中还剩下\n没有被scanf读走需要 getchar() char*str=&amp;#34;hello world &amp;#34;; printf(&amp;#34;%s&amp;#34;,str); printf(&amp;#34;%p &amp;#34;,str); //字符串在常量池中，用指针指向 char*str2=&amp;#34;hello world &amp;#34;; printf(&amp;#34;%p &amp;#34;,str2); //在堆中，初始化 char s3[]=&amp;#34;hello world&amp;#34;; printf(&amp;#34;%p&amp;#34;,s3); return 0; output:hello world 00405044 00405044 0061FF0C
+char*p=strstr(&amp;#34;hello world&amp;#34;,&amp;#34;world&amp;#34;); printf(&amp;#34;%s&amp;#34;,p); output: world int array[5]{1,2,3,4,5}; //容器内数字没有改变 for(int x:array){ x+=100; cout&amp;lt;&amp;lt;x&amp;lt;&amp;lt;&amp;#34; &amp;#34;; } //容器改变 for(int &amp;amp;x:array){ x+=100; cout&amp;lt;&amp;lt;x&amp;lt;&amp;lt;&amp;#34; &amp;#34;; } 对象的构造专题 #include&amp;lt;iostream&amp;gt;using namespace std; class Student{ private: int sid ; string name ; public: Student(){ cout&amp;lt;&amp;lt;&amp;#34;Student()&amp;#34;&amp;lt;&amp;lt;endl; } Student(int sid , string name){ this-&amp;gt;sid=sid;//等号为赋值，不是初始化  this-&amp;gt;name=name ; cout&amp;lt;&amp;lt;&amp;#34;student(int,string)&amp;#34;&amp;lt;&amp;lt;endl; } }; int main(){ int num(122); cout&amp;lt;&amp;lt;num&amp;lt;&amp;lt;endl; int array[]={1,2,3,4,5}; int array2[]{1,2,3,4,5}; Student stu;//用默认构造函数Student()创建对象  Student zs(1001,&amp;#34;shangsan&amp;#34;);//用构造函数创建对象  Student ls{1002,&amp;#34;lisi&amp;#34;}; Student ww={1003,&amp;#34;wangwu&amp;#34;};//初始化 } 多态 #include&amp;lt;iostream&amp;gt;using namespace std; class People{ public: virtual void say(){cout&amp;lt;&amp;lt;&amp;#34;I&amp;#39;m a person&amp;#34;&amp;lt;&amp;lt;endl;} }; class Student : public People{ void say(){cout&amp;lt;&amp;lt;&amp;#34;I&amp;#39;m a student&amp;#34;&amp;lt;&amp;lt;endl;} }; class Teacher:public People{ public: void say(){cout&amp;lt;&amp;lt;&amp;#34;I&amp;#39;m a teacher&amp;#34;&amp;lt;&amp;lt;endl;} }; void func(People* people){ people-&amp;gt;say(); } int main(){ Student stu; Teacher tea ; //如果不是虚函数，C++为追求效率会选择静态链编，直接在编译时期就绑定People::say()的地址  //改为虚函数后，可以采用动态链接的方式，才有多态的效果，编译时不确定函数的入口地址，在运行时才确定  func(&amp;amp;stu); func(&amp;amp;tea); People &amp;amp;r=stu;//引用也有多态  r.</description>
+    </item>
+    
+  </channel>
+</rss>
