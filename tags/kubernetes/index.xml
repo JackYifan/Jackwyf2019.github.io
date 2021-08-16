@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on Jack Wu</title>
+    <link>https://Jackwyf2019.github.io/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on Jack Wu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://Jackwyf2019.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes笔记</title>
+      <link>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</guid>
+      <description>容器的开启和停止 删除容器之前需要先停止
+[root@localhost ~]# docker rm 3490d7c7d901 Error response from daemon: You cannot remove a running container 3490d7c7d90167692e73c2654d378b2bca02f77839e1e236d537008487fcfaa2. Stop the container before attempting removal or force remove [root@localhost ~]# docker stop 3490d7c7d901 3490d7c7d901 [root@localhost ~]# docker rm 3490d7c7d901 3490d7c7d901 命名代替ID [root@localhost ~]# docker run --name my_redis -d redis 17905e55aae8dfa53107568a997f447989b95f9d8103261ebfea2910f3f87c7d [root@localhost ~]# docker exec -it my_redis /bin/bash root@17905e55aae8:/data# redis-cli 127.0.0.1:6379&amp;gt; set arg 100 OK 127.0.0.1:6379&amp;gt; keys * 1) &amp;#34;arg&amp;#34; 127.0.0.1:6379&amp;gt; get arg &amp;#34;100&amp;#34; 127.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes笔记</title>
+      <link>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</guid>
+      <description>Kubernetes笔记 常用命令 部署
+kubectl create deployment tomcat6 --image=tomcat:6.0.53-jre8 #指定镜像 暴露端口
+kubectl expose deployment tomcat6 --port=80 --target-port=8080 --type=NodePort  --port=80 pod的端口 --target-port=8080 docker端口 --type=NodePort 自动分配service端口  获取所有service信息
+kubectl get svc -o wide 获取kubernetes信息
+kubectl get all #所有信息 kubectl get pods kubectl get nodes #默认名称空间 kubectl get nodes --all-namespaces 扩充
+kubectl scale --replicas=3 deployment tomcat6  scale规模 replicas复制品3份  删除
+kubectl delete [NAME] 测试
+不直接执行命令，常用于辅助
+--dry-run -o yaml将命令行转yaml</description>
+    </item>
+    
+  </channel>
+</rss>

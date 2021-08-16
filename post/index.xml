@@ -15,6 +15,8 @@
       <description>字符串 char *p=&amp;#34;Hello World&amp;#34;; //&amp;#34;Hello World&amp;#34;字符串存储在常量存储区中,属于只读存储区,不能进行写操作 *p=&amp;#39;w&amp;#39;;//错误写法 char str[]=&amp;#34;Hello World&amp;#34;; //若在函数内定义就分配到栈中，属于局部变量 //若在全局分配或用static关键词修饰则存储在静态存储区 str=&amp;#34;Hello&amp;#34;;//错误,数组是常量指针，不能修改其地址内容 即不能作为左值但是其内容是可以修改的 str[0]=&amp;#39;w&amp;#39;;//正确 p=str; p=&amp;amp;str[0];//二者等价 scanf() 遇 到空白字符空格 Tab 回车 就代表输入结束
 gets()遇到回车结束。过程：把回车从缓存区中读走但是不作为字符串的一部分
 &amp;quot;%*c&amp;quot; 读入一个字符，但忽略它（即不赋值给任何变量）。
+当 cin&amp;raquo; 从缓冲区中读取数据时，若缓冲区中第一个字符是空格、tab或换行这些分隔符时，cin&amp;raquo; 会将其忽略并清除，继续读取下一个字符，若缓冲区为空，则继续等待。但是如果读取成功，字符后面的分隔符是残留在缓冲区的，cin&amp;raquo; 不做处理。
+cin&amp;raquo; 对缓冲区中的第一个换行符视而不见，采取的措施是忽略清除，继续阻塞等待缓冲区有效数据的到来。但是，getline() 读取数据时，并非像 cin&amp;raquo; 那样忽略第一个换行符，getline() 发现 cin 的缓冲区中有一个残留的换行符，不阻塞请求键盘输入，直接读取，送入目标字符串后，因为读取的内容为空，所以程序中的变量 test 为空串。
 作用域和生存期 static int a = 1 在gcc test.c时赋初值为1且只初始化一次。若是全局静态变量仅能在test.c中使用（多文件时候静态全局变量可以重名），若是静态局部变量只能在{}中间使用，但再次调用时候因为地址没有变化所以值没有变化。
 不是静态的全局变量在其他文件中也能使用。
 初始化问题 静态变量和全局变量因为在静态存储区，所以在没有初始化时赋初值为0
@@ -41,6 +43,42 @@ Request Method:OPTIONS 预检请求 nginx部署为同一个域 响应头允许�
       <description>添加一组元素 public class AddingGroups { public static void main(String[] args) { Collection&amp;lt;Integer&amp;gt; collection = new ArrayList&amp;lt;&amp;gt;(Arrays.asList(1, 2, 3, 4, 5)); //用collection初始化  Integer[] moreInts = { 6, 7, 8, 9, 10 }; //数组的初始化方法  collection.addAll(Arrays.asList(moreInts)); Collections.addAll(collection, 11, 12, 13, 14, 15);//可变参数本质上是数组  Collections.addAll(collection, moreInts); List&amp;lt;Integer&amp;gt; list = Arrays.asList(16,17,18,19,20); //asList返回的List底层是数组，不能增删元素  } } 显示类型参数说明 List&amp;lt;Snow&amp;gt; snow4 = Arrays.&amp;lt;Snow&amp;gt;asList(new Light(), new Heavy(), new Slush());
 asList返回的ArrayList是Arrays的内部类
 private static class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt; implements RandomAccess, java.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes笔记</title>
+      <link>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</guid>
+      <description>容器的开启和停止 删除容器之前需要先停止
+[root@localhost ~]# docker rm 3490d7c7d901 Error response from daemon: You cannot remove a running container 3490d7c7d90167692e73c2654d378b2bca02f77839e1e236d537008487fcfaa2. Stop the container before attempting removal or force remove [root@localhost ~]# docker stop 3490d7c7d901 3490d7c7d901 [root@localhost ~]# docker rm 3490d7c7d901 3490d7c7d901 命名代替ID [root@localhost ~]# docker run --name my_redis -d redis 17905e55aae8dfa53107568a997f447989b95f9d8103261ebfea2910f3f87c7d [root@localhost ~]# docker exec -it my_redis /bin/bash root@17905e55aae8:/data# redis-cli 127.0.0.1:6379&amp;gt; set arg 100 OK 127.0.0.1:6379&amp;gt; keys * 1) &amp;#34;arg&amp;#34; 127.0.0.1:6379&amp;gt; get arg &amp;#34;100&amp;#34; 127.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes笔记</title>
+      <link>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</guid>
+      <description>Kubernetes笔记 常用命令 部署
+kubectl create deployment tomcat6 --image=tomcat:6.0.53-jre8 #指定镜像 暴露端口
+kubectl expose deployment tomcat6 --port=80 --target-port=8080 --type=NodePort  --port=80 pod的端口 --target-port=8080 docker端口 --type=NodePort 自动分配service端口  获取所有service信息
+kubectl get svc -o wide 获取kubernetes信息
+kubectl get all #所有信息 kubectl get pods kubectl get nodes #默认名称空间 kubectl get nodes --all-namespaces 扩充
+kubectl scale --replicas=3 deployment tomcat6  scale规模 replicas复制品3份  删除
+kubectl delete [NAME] 测试
+不直接执行命令，常用于辅助
+--dry-run -o yaml将命令行转yaml</description>
+    </item>
+    
+    <item>
+      <title>计算机组成原理笔记</title>
+      <link>https://Jackwyf2019.github.io/p/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/p/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0/</guid>
+      <description>cs : chip selector 片选信号 we : write enable MREQ : memory request 接译码器的使能端，等到电位稳定后控制器发出信号 波形图有0有1化成矩形，当变化时候有交叉</description>
     </item>
     
     <item>

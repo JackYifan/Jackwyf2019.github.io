@@ -27,6 +27,8 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;scanf()&lt;/code&gt; 遇 到空白字符&lt;code&gt;空格 Tab 回车 &lt;/code&gt;就代表输入结束&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;gets()&lt;/code&gt;遇到回车结束。过程：把回车从缓存区中读走但是不作为字符串的一部分&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;&amp;quot;%*c&amp;quot;&lt;/code&gt; 读入一个字符，但忽略它（即不赋值给任何变量）。&lt;/p&gt;
+&lt;p&gt;当 cin&amp;raquo; 从缓冲区中读取数据时，若缓冲区中第一个字符是空格、tab或换行这些分隔符时，cin&amp;raquo; 会将其忽略并清除，继续读取下一个字符，若缓冲区为空，则继续等待。但是如果读取成功，字符后面的分隔符是残留在缓冲区的，cin&amp;raquo; 不做处理。&lt;/p&gt;
+&lt;p&gt;cin&amp;raquo; 对缓冲区中的第一个换行符视而不见，采取的措施是忽略清除，继续阻塞等待缓冲区有效数据的到来。但是，getline() 读取数据时，并非像 cin&amp;raquo; 那样忽略第一个换行符，getline() 发现 cin 的缓冲区中有一个残留的换行符，不阻塞请求键盘输入，直接读取，送入目标字符串后，因为读取的内容为空，所以程序中的变量 test 为空串。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;h1 id=&#34;作用域和生存期&#34;&gt;作用域和生存期&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;static int a = 1&lt;/code&gt; 在&lt;code&gt;gcc test.c&lt;/code&gt;时赋初值为1且只初始化一次。若是全局静态变量仅能在&lt;code&gt;test.c&lt;/code&gt;中使用（多文件时候静态全局变量可以重名），若是静态局部变量只能在&lt;code&gt;{}&lt;/code&gt;中间使用，但再次调用时候因为地址没有变化所以值没有变化。&lt;/p&gt;
@@ -1080,7 +1082,115 @@ taskkill -pid (进程pid) -f
 &lt;p&gt;&lt;strong&gt;asList&lt;/strong&gt;返回的ArrayList是Arrays的内部类&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ArrayList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AbstractList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
         &lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RandomAccess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Serializable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;collection&#34;&gt;Collection&lt;/h2&gt;
+&lt;h3 id=&#34;set&#34;&gt;Set&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HashSet 快速获取元素，存储顺序与添加顺序无关&lt;/li&gt;
+&lt;li&gt;TreeSet 按比较顺序排序&lt;/li&gt;
+&lt;li&gt;LinkedHashMap 按添加的顺序保存对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;map&#34;&gt;Map&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HashMap 查找速度最快&lt;/li&gt;
+&lt;li&gt;TreeMap 按比较顺序&lt;/li&gt;
+&lt;li&gt;LinkedHashMap 按插入顺序同时保留了HashMap的查找速度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Api中传引用的会用&lt;/strong&gt; &lt;code&gt;equals()&lt;/code&gt;判断是否相等比如&lt;code&gt;indexOf()&lt;/code&gt; &lt;code&gt;remove()&lt;/code&gt;等&lt;/p&gt;
+&lt;p&gt;改变sublist会引起原列表的改变&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(){&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Random&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;random&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;47&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;ArrayList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ArrayList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Collections&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;addAll&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;List&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;subList&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;subList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Collections&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;shuffle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subList&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;//[4, 3, 2]
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;//[1, 4, 3, 2, 5]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;retain()&lt;/code&gt; &lt;code&gt;containsAll()&lt;/code&gt; 不关注顺序&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Kubernetes笔记</title>
+        <link>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h2 id=&#34;容器的开启和停止&#34;&gt;容器的开启和停止&lt;/h2&gt;
+&lt;p&gt;删除容器之前需要先停止&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# docker rm 3490d7c7d901&lt;/span&gt;
+Error response from daemon: You cannot remove a running container 3490d7c7d90167692e73c2654d378b2bca02f77839e1e236d537008487fcfaa2. Stop the container before attempting removal or force remove
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# docker stop 3490d7c7d901&lt;/span&gt;
+3490d7c7d901
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# docker rm 3490d7c7d901&lt;/span&gt;
+3490d7c7d901
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;命名代替id&#34;&gt;命名代替ID&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# docker run --name my_redis -d redis&lt;/span&gt;
+17905e55aae8dfa53107568a997f447989b95f9d8103261ebfea2910f3f87c7d
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# docker exec -it my_redis /bin/bash&lt;/span&gt;
+root@17905e55aae8:/data# redis-cli
+127.0.0.1:6379&amp;gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; arg &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt;
+OK
+127.0.0.1:6379&amp;gt; keys *
+1&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;arg&amp;#34;&lt;/span&gt;
+127.0.0.1:6379&amp;gt; get arg
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;100&amp;#34;&lt;/span&gt;
+127.0.0.1:6379&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+root@17905e55aae8:/data# &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt; 
+&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;# &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Kubernetes笔记</title>
+        <link>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h1 id=&#34;kubernetes笔记&#34;&gt;Kubernetes笔记&lt;/h1&gt;
+&lt;h2 id=&#34;常用命令&#34;&gt;常用命令&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;部署&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl create deployment tomcat6 --image&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;tomcat:6.0.53-jre8 &lt;span class=&#34;c1&#34;&gt;#指定镜像&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;暴露端口&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl expose deployment tomcat6 --port&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;80&lt;/span&gt; --target-port&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;8080&lt;/span&gt; --type&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;NodePort
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--port=80&lt;/code&gt; pod的端口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--target-port=8080&lt;/code&gt; docker端口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--type=NodePort&lt;/code&gt; 自动分配service端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;获取所有service信息&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl get svc -o wide
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;获取kubernetes信息&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl get all &lt;span class=&#34;c1&#34;&gt;#所有信息&lt;/span&gt;
+kubectl get pods
+kubectl get nodes &lt;span class=&#34;c1&#34;&gt;#默认名称空间&lt;/span&gt;
+kubectl get nodes --all-namespaces 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;扩充&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl scale --replicas&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; deployment tomcat6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;scale&lt;/code&gt;规模&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;replicas&lt;/code&gt;复制品3份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;删除&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;kubectl delete &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;NAME&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;测试&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;不直接执行命令，常用于辅助&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;--dry-run -o yaml&lt;/code&gt;将命令行转yaml&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>计算机组成原理笔记</title>
+        <link>https://Jackwyf2019.github.io/p/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://Jackwyf2019.github.io/p/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;p&gt;cs : chip selector 片选信号
+we : write enable 
+MREQ : memory request 接译码器的使能端，等到电位稳定后控制器发出信号
+波形图有0有1化成矩形，当变化时候有交叉&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>面向对象程序设计</title>

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='some tips in C program'><title>C语言复习笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Kubernetes note'><title>Kubernetes笔记</title>
 
-<link rel='canonical' href='https://Jackwyf2019.github.io/p/c%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+<link rel='canonical' href='https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='C语言复习笔记'>
-<meta property='og:description' content='some tips in C program'>
-<meta property='og:url' content='https://Jackwyf2019.github.io/p/c%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Kubernetes笔记'>
+<meta property='og:description' content='Kubernetes note'>
+<meta property='og:url' content='https://Jackwyf2019.github.io/p/kubernetes%E7%AC%94%E8%AE%B0/'>
 <meta property='og:site_name' content='Jack Wu'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C' />
-<meta name="twitter:title" content="C语言复习笔记">
-<meta name="twitter:description" content="some tips in C program">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Kubernetes' />
+<meta name="twitter:title" content="Kubernetes笔记">
+<meta name="twitter:description" content="Kubernetes note">
     </head>
     <body class="">
     <script>
@@ -186,42 +186,41 @@
     
 
     <h2 class="article-title">
-        <a href="/p/c%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/">C语言复习笔记</a>
+        <a href="/p/kubernetes%E7%AC%94%E8%AE%B0/">Kubernetes笔记</a>
     </h2>
 
     
     <h3 class="article-subtitle">
-        some tips in C program
+        Kubernetes note
     </h3>
     </div>
 </header>
 
     <section class="article-content">
-    <h2 id="字符串">字符串</h2>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">char</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="s">&#34;Hello World&#34;</span><span class="p">;</span>
-<span class="c1">//&#34;Hello World&#34;字符串存储在常量存储区中,属于只读存储区,不能进行写操作
-</span><span class="c1"></span><span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="sc">&#39;w&#39;</span><span class="p">;</span><span class="c1">//错误写法
-</span></code></pre></div><p><!-- raw HTML omitted --></p>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">char</span> <span class="n">str</span><span class="p">[]</span><span class="o">=</span><span class="s">&#34;Hello World&#34;</span><span class="p">;</span>
-<span class="c1">//若在函数内定义就分配到栈中，属于局部变量
-</span><span class="c1">//若在全局分配或用static关键词修饰则存储在静态存储区
-</span><span class="c1"></span><span class="n">str</span><span class="o">=</span><span class="s">&#34;Hello&#34;</span><span class="p">;</span><span class="c1">//错误,数组是常量指针，不能修改其地址内容 即不能作为左值但是其内容是可以修改的
-</span><span class="c1"></span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;w&#39;</span><span class="p">;</span><span class="c1">//正确
-</span><span class="c1"></span><span class="n">p</span><span class="o">=</span><span class="n">str</span><span class="p">;</span>
-<span class="n">p</span><span class="o">=&amp;</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="c1">//二者等价
-</span></code></pre></div><p><code>scanf()</code> 遇 到空白字符<code>空格 Tab 回车 </code>就代表输入结束</p>
-<p><code>gets()</code>遇到回车结束。过程：把回车从缓存区中读走但是不作为字符串的一部分</p>
-<p><code>&quot;%*c&quot;</code> 读入一个字符，但忽略它（即不赋值给任何变量）。</p>
-<p>当 cin&raquo; 从缓冲区中读取数据时，若缓冲区中第一个字符是空格、tab或换行这些分隔符时，cin&raquo; 会将其忽略并清除，继续读取下一个字符，若缓冲区为空，则继续等待。但是如果读取成功，字符后面的分隔符是残留在缓冲区的，cin&raquo; 不做处理。</p>
-<p>cin&raquo; 对缓冲区中的第一个换行符视而不见，采取的措施是忽略清除，继续阻塞等待缓冲区有效数据的到来。但是，getline() 读取数据时，并非像 cin&raquo; 那样忽略第一个换行符，getline() 发现 cin 的缓冲区中有一个残留的换行符，不阻塞请求键盘输入，直接读取，送入目标字符串后，因为读取的内容为空，所以程序中的变量 test 为空串。</p>
-<p><!-- raw HTML omitted --></p>
-<h1 id="作用域和生存期">作用域和生存期</h1>
-<p><code>static int a = 1</code> 在<code>gcc test.c</code>时赋初值为1且只初始化一次。若是全局静态变量仅能在<code>test.c</code>中使用（多文件时候静态全局变量可以重名），若是静态局部变量只能在<code>{}</code>中间使用，但再次调用时候因为地址没有变化所以值没有变化。</p>
-<p>不是静态的全局变量在其他文件中也能使用。</p>
-<h2 id="初始化问题">初始化问题</h2>
-<p>静态变量和全局变量因为在静态存储区，所以在没有初始化时赋初值为0</p>
-<p>auto局部变量在没有赋值时，赋的是随机值</p>
-
+    <h2 id="容器的开启和停止">容器的开启和停止</h2>
+<p>删除容器之前需要先停止</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker rm 3490d7c7d901</span>
+Error response from daemon: You cannot remove a running container 3490d7c7d90167692e73c2654d378b2bca02f77839e1e236d537008487fcfaa2. Stop the container before attempting removal or force remove
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker stop 3490d7c7d901</span>
+3490d7c7d901
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker rm 3490d7c7d901</span>
+3490d7c7d901
+</code></pre></div><h2 id="命名代替id">命名代替ID</h2>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker run --name my_redis -d redis</span>
+17905e55aae8dfa53107568a997f447989b95f9d8103261ebfea2910f3f87c7d
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker exec -it my_redis /bin/bash</span>
+root@17905e55aae8:/data# redis-cli
+127.0.0.1:6379&gt; <span class="nb">set</span> arg <span class="m">100</span>
+OK
+127.0.0.1:6379&gt; keys *
+1<span class="o">)</span> <span class="s2">&#34;arg&#34;</span>
+127.0.0.1:6379&gt; get arg
+<span class="s2">&#34;100&#34;</span>
+127.0.0.1:6379&gt; <span class="nb">exit</span>
+root@17905e55aae8:/data# <span class="nb">exit</span> 
+<span class="nb">exit</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></div>
 </section>
 
 
@@ -229,7 +228,7 @@
     
     <section class="article-tags">
         
-            <a href="/tags/c/">C</a>
+            <a href="/tags/kubernetes/">Kubernetes</a>
         
     </section>
 
@@ -404,6 +403,17 @@
     (function () {
         const customFont = document.createElement('link');
         customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
+400;700&display=swap";
 
         customFont.type = "text/css";
         customFont.rel = "stylesheet";
