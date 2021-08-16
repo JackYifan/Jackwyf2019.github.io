@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on Jack Wu</title>
+    <link>https://Jackwyf2019.github.io/tags/algorithm/</link>
+    <description>Recent content in algorithm on Jack Wu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://Jackwyf2019.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode题解</title>
+      <link>https://Jackwyf2019.github.io/p/leetcode%E9%A2%98%E8%A7%A3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Jackwyf2019.github.io/p/leetcode%E9%A2%98%E8%A7%A3/</guid>
+      <description>题解 671. 二叉树中第二小的节点 class Solution { public: int ans = -1; int root_val; void dfs(TreeNode* root){ if(root==nullptr) return ; if(ans!=-1 &amp;amp;&amp;amp; root-&amp;gt;val&amp;gt;ans) return ; if(root-&amp;gt;val&amp;gt;root_val) ans = root-&amp;gt;val; dfs(root-&amp;gt;left); dfs(root-&amp;gt;right); } int findSecondMinimumValue(TreeNode* root) { root_val = root-&amp;gt;val; dfs(root); return ans; } }; 常用操作：初值设为错误码，判断是否为错误码可以得知是否为第一次。
+ C++ 四舍五入到整数  int a = (int)(x+0.5); Dynamic Host Configuration Protocol -&amp;gt;DHCP
+863. 二叉树中所有距离为 K 的结点 /** * Definition for a binary tree node. * struct TreeNode { * int val; * TreeNode *left; * TreeNode *right; * TreeNode(int x) : val(x), left(NULL), right(NULL) {} * }; */ class Solution { public: map&amp;lt;TreeNode*,TreeNode*&amp;gt; parent; vector&amp;lt;int&amp;gt; ans; void findParent(TreeNode* root){ if(root==NULL) return ; if(root-&amp;gt;left){ parent[root-&amp;gt;left]=root; findParent(root-&amp;gt;left); } if(root-&amp;gt;right){ parent[root-&amp;gt;right]=root; findParent(root-&amp;gt;right); } } void dfs(TreeNode* root,int depth,int k,TreeNode* preNode){ if(root==NULL) return ; if(depth==k) { ans.</description>
+    </item>
+    
+  </channel>
+</rss>
